@@ -15,6 +15,7 @@ class RegistrationView extends GetView<RegistrationController> {
       body: SafeArea(
         child: SizedBox(
           height: Get.mediaQuery.size.height,
+          width: Get.mediaQuery.size.width,
           child: Stack(
             children: [
               Transform.translate(
