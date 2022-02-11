@@ -4,6 +4,8 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/modules/transaction/views/deposit_view.dart';
+import 'package:x1xcash/app/modules/transaction/views/withdrawal_view.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -49,7 +51,9 @@ class HomeView extends GetView<HomeController> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18)),
                             backgroundColor: HexColor("#1E32FA")),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => DepositView());
+                        },
                         child: Text(
                           "Dépôt",
                           style: TextStyle(
@@ -68,7 +72,9 @@ class HomeView extends GetView<HomeController> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
                             backgroundColor: HexColor("#66C48F")),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => WithdrawalView());
+                        },
                         child: Text(
                           "Retrait",
                           style: TextStyle(
@@ -163,717 +169,533 @@ class HomeView extends GetView<HomeController> {
                         ),
                         Expanded(
                             child: Padding(
-                          padding: EdgeInsets.only(top: 2.00.hp),
-                          child: ListView(
-                            padding: EdgeInsets.only(left: 8.00.wp),
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
+                              padding: EdgeInsets.only(top: 2.00.hp),
+                              child: ListView(
+                                padding: EdgeInsets.only(left: 8.00.wp),
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                        children: [
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Dépôt",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                            "Dépôt",
-                                            style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                          )),
-                                          Container(
-                                              child: Text(
-                                            "2268397335939329",
-                                            style:
-                                                TextStyle(color: Colors.grey),
-                                          )),
+                                                "-1,200",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#DC0919"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Retrait",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "+6,950",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#1AC263"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Dépôt",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "-1,200",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#DC0919"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Retrait",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "+6,950",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#1AC263"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Dépôt",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "-1,200",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#DC0919"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Retrait",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "+6,950",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#1AC263"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Dépôt",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "-1,200",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#DC0919"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        top: 1.00.hp, bottom: 1.00.hp),
+                                    child: Container(
+                                      width: Get.mediaQuery.size.width,
+                                      child: Row(
                                         children: [
                                           Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
+                                            height: 7.00.hp,
+                                            width: 12.00.wp,
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(0.60.hp),
+                                              child: Image.asset(
+                                                  "assets/images/1xbet_logo.png"),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 2.00.wp,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                  child: Text(
+                                                    "Retrait",
+                                                    style:
+                                                    TextStyle(fontSize: 12.00.sp),
+                                                  )),
+                                              Container(
+                                                  child: Text(
+                                                    "2268397335939329",
+                                                    style:
+                                                    TextStyle(color: Colors.grey),
+                                                  )),
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            width: 22.00.wp,
+                                          ),
                                           Container(
+                                            width: 20.00.wp,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: 1.00.hp,
+                                                  bottom: 1.00.hp,
+                                                  left: 2.00.wp),
                                               child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
+                                                "+6,950",
+                                                textAlign: TextAlign.justify,
+                                                style: TextStyle(
+                                                    fontSize: 10.50.sp,
+                                                    color: HexColor("#1AC263"),
+                                                    fontWeight: FontWeight.bold),
+                                              ),
+                                            ),
+                                          ),
                                         ],
                                       ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
-                                          Container(
-                                              child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
-                                          Container(
-                                              child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(
-                                    top: 1.00.hp, bottom: 1.00.hp),
-                                child: Container(
-                                  width: Get.mediaQuery.size.width,
-                                  child: Row(
-                                    children: [
-                                      Container(
-                                        height: 7.00.hp,
-                                        width: 12.00.wp,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(0.60.hp),
-                                          child: Image.asset(
-                                              "assets/images/1xbet_logo.png"),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 2.00.wp,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                              child: Text(
-                                                "Dépôt",
-                                                style:
-                                                TextStyle(fontSize: 12.00.sp),
-                                              )),
-                                          Container(
-                                              child: Text(
-                                                "2268397335939329",
-                                                style:
-                                                TextStyle(color: Colors.grey),
-                                              )),
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        width: 22.00.wp,
-                                      ),
-                                      Container(
-                                        width: 20.00.wp,
-                                        child: Padding(
-                                          padding: EdgeInsets.only(
-                                              top: 1.00.hp,
-                                              bottom: 1.00.hp,
-                                              left: 2.00.wp),
-                                          child: Text(
-                                            "-2,000",
-                                            textAlign: TextAlign.justify,
-                                            style: TextStyle(
-                                                color: HexColor("#DC0919"),
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ))
+                            ))
                       ],
                     )),
               ),
