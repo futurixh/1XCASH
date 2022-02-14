@@ -3,6 +3,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/modules/registration/views/registration_view.dart';
 
 class ConnectionFormView extends GetView {
   @override
@@ -154,7 +155,7 @@ class ConnectionFormView extends GetView {
                             ),
                         ),
                   Positioned(
-                    top: 87.00.hp,
+                    top: 85.00.hp,
                     left: 11.00.wp,
                     child: SizedBox(
                       width: 80.00.wp,
@@ -164,7 +165,9 @@ class ConnectionFormView extends GetView {
                             shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
                             backgroundColor: HexColor("#66C48F")
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => RegistrationView());
+                        },
                         child: Text(
                           "Se connecter",
                           style: TextStyle(

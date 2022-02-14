@@ -3,6 +3,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/modules/home/views/home_view.dart';
 
 class RegistrationFormView extends GetView {
   @override
@@ -27,7 +28,7 @@ class RegistrationFormView extends GetView {
                     ),
                   ),
               Positioned(
-                top: 86.00.hp,
+                top: 84.00.hp,
                 left: 11.00.wp,
                 child: SizedBox(
                   width: 80.00.wp,
@@ -37,7 +38,7 @@ class RegistrationFormView extends GetView {
                         shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
                         backgroundColor: HexColor("#66C48F")
                     ),
-                    onPressed: () {Get.to(() => RegistrationFormView());},
+                    onPressed: () {Get.to(() => HomeView());},
                     child: Text(
                       "Soumettre",
                       style: TextStyle(
@@ -238,7 +239,7 @@ class RegistrationFormView extends GetView {
                                       SizedBox(
                                         width: 7.00.wp,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         IconData(0xe190, fontFamily: 'MaterialIcons'),
                                         color: Colors.grey,
                                       ),
@@ -290,7 +291,7 @@ class RegistrationFormView extends GetView {
                                       SizedBox(
                                         width: 7.00.wp,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         IconData(0xe190, fontFamily: 'MaterialIcons'),
                                         color: Colors.grey,
                                       ),
@@ -346,7 +347,7 @@ class RegistrationFormView extends GetView {
                                       SizedBox(
                                         width: 7.00.wp,
                                       ),
-                                      Icon(
+                                      const Icon(
                                         IconData(0xe190, fontFamily: 'MaterialIcons'),
                                         color: Colors.grey,
                                       ),

@@ -67,7 +67,7 @@ class ConnectionView extends GetView<ConnectionController> {
                   )
               ),
               Positioned(
-                top: 87.00.hp,
+                top: 85.00.hp,
                 left: 11.00.wp,
                 child: SizedBox(
                   width: 80.00.wp,
