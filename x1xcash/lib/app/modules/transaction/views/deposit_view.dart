@@ -3,6 +3,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/core/values/colors.dart';
 
 class DepositView extends GetView {
   @override
@@ -56,7 +57,7 @@ class DepositView extends GetView {
                             fontSize: 11.00.sp
                         ),
                         filled: true,
-                        fillColor: HexColor("#EEF7FB"),
+                        fillColor: HexColor(MyColors.backgroundColor),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
                         ),
@@ -101,7 +102,7 @@ class DepositView extends GetView {
                             fontSize: 11.00.sp
                         ),
                         filled: true,
-                        fillColor: HexColor("#EEF7FB"),
+                        fillColor: HexColor(MyColors.backgroundColor),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(18),
                         ),
@@ -125,7 +126,7 @@ class DepositView extends GetView {
                   child: TextButton(
                     style: TextButton.styleFrom(
                         shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        backgroundColor: HexColor("#66C48F")
+                        backgroundColor: HexColor(MyColors.green)
                     ),
                     onPressed: () {},
                     child: Row(

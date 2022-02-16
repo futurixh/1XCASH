@@ -3,6 +3,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/core/values/colors.dart';
 import 'package:x1xcash/app/modules/connection/views/connection_form_view.dart';
 
 import '../controllers/connection_controller.dart';
@@ -11,7 +12,7 @@ class ConnectionView extends GetView<ConnectionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("#EEF7FB"),
+      backgroundColor: HexColor(MyColors.backgroundColor),
       body: SafeArea(
         child: SizedBox(
           height: Get.mediaQuery.size.height,
@@ -75,7 +76,7 @@ class ConnectionView extends GetView<ConnectionController> {
                   child: TextButton(
                     style: TextButton.styleFrom(
                         shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-                        backgroundColor: HexColor("#66C48F")
+                        backgroundColor: HexColor(MyColors.green)
                     ),
                     onPressed: () {Get.to(() => ConnectionFormView());},
                     child: Text(

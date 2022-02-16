@@ -3,13 +3,14 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/core/values/colors.dart';
 import 'package:x1xcash/app/modules/home/views/home_view.dart';
 
 class RegistrationFormView extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HexColor("#EEF7FB"),
+      backgroundColor: HexColor(MyColors.backgroundColor),
       body: SafeArea(
         child: SizedBox(
           height: Get.mediaQuery.size.height,
@@ -23,7 +24,7 @@ class RegistrationFormView extends GetView {
                       height: 60.00.hp,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: HexColor("#66C48F").withOpacity(0.4),
+                        color: HexColor(MyColors.green).withOpacity(0.4),
                       ),
                     ),
                   ),
@@ -36,7 +37,7 @@ class RegistrationFormView extends GetView {
                   child: TextButton(
                     style: TextButton.styleFrom(
                         shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(22)),
-                        backgroundColor: HexColor("#66C48F")
+                        backgroundColor: HexColor(MyColors.green)
                     ),
                     onPressed: () {Get.to(() => HomeView());},
                     child: Text(
@@ -69,7 +70,7 @@ class RegistrationFormView extends GetView {
                           TextSpan(
                             text: "le formulaire !",
                             style: TextStyle(
-                                color: HexColor("#66C48F")
+                                color: HexColor(MyColors.green)
                             ),
                           ),
                         ]

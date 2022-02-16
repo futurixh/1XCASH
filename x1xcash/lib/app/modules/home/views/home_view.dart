@@ -4,6 +4,7 @@ import 'package:flutter_hex_color/flutter_hex_color.dart';
 
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
+import 'package:x1xcash/app/core/values/colors.dart';
 import 'package:x1xcash/app/modules/transaction/views/deposit_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/withdrawal_view.dart';
 
@@ -50,7 +51,7 @@ class HomeView extends GetView<HomeController> {
                         style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18)),
-                            backgroundColor: HexColor("#1E32FA")),
+                            backgroundColor: HexColor(MyColors.blue)),
                         onPressed: () {
                           Get.to(() => DepositView());
                         },
@@ -71,7 +72,7 @@ class HomeView extends GetView<HomeController> {
                         style: TextButton.styleFrom(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15)),
-                            backgroundColor: HexColor("#66C48F")),
+                            backgroundColor: HexColor(MyColors.green)),
                         onPressed: () {
                           Get.to(() => WithdrawalView());
                         },
@@ -137,7 +138,7 @@ class HomeView extends GetView<HomeController> {
               Expanded(
                 child: Container(
                     decoration: BoxDecoration(
-                      color: HexColor("#EEF7FB"),
+                      color: HexColor(MyColors.backgroundColor),
                       borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(30),
                           topRight: Radius.circular(30)),
@@ -229,7 +230,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#DC0919"),
+                                                    color: HexColor(MyColors.redTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -294,7 +295,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#1AC263"),
+                                                    color: HexColor(MyColors.greenTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -359,7 +360,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#DC0919"),
+                                                    color: HexColor(MyColors.redTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -424,7 +425,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#1AC263"),
+                                                    color: HexColor(MyColors.greenTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -489,7 +490,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#DC0919"),
+                                                    color: HexColor(MyColors.redTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -554,7 +555,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#1AC263"),
+                                                    color: HexColor(MyColors.greenTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -619,7 +620,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#DC0919"),
+                                                    color: HexColor(MyColors.redTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
@@ -684,7 +685,7 @@ class HomeView extends GetView<HomeController> {
                                                 textAlign: TextAlign.justify,
                                                 style: TextStyle(
                                                     fontSize: 10.50.sp,
-                                                    color: HexColor("#1AC263"),
+                                                    color: HexColor(MyColors.greenTransaction),
                                                     fontWeight: FontWeight.bold),
                                               ),
                                             ),
