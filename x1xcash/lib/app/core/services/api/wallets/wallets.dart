@@ -12,7 +12,6 @@ extension Wallets on ApiService {
   Future<Wallet?> getMyWallet() async {
     String token = await getBearerToken();
 
-    log(token);
     try {
       final response = await dio.get(
         Endpoints.getMyWallet,

@@ -1,11 +1,29 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
-
+import 'package:x1xcash/app/core/services/api/api.service.dart';
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
+import 'package:x1xcash/locator.dart';
 
-class WithdrawalView extends GetView {
+class WithdrawalView extends StatefulWidget {
+  const WithdrawalView({Key? key}) : super(key: key);
+
+  @override
+  State<WithdrawalView> createState() => _WithdrawalViewState();
+}
+
+class _WithdrawalViewState extends State<WithdrawalView> {
+  final _idController = TextEditingController();
+  final _amountController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _formkey = GlobalKey<FormState>();
+  final apiService = locator<ApiService>();
+
+  bool _isActive = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,17 +32,13 @@ class WithdrawalView extends GetView {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        iconTheme: IconThemeData(
-            color: Colors.black,
-            size: 3.50.hp
-        ),
+        iconTheme: IconThemeData(color: Colors.black, size: 3.50.hp),
         title: Text(
           'Retrait 1xbet',
           style: TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
-              fontSize: 18.00.sp
-          ),
+              fontSize: 18.00.sp),
         ),
         centerTitle: true,
       ),
@@ -40,8 +54,7 @@ class WithdrawalView extends GetView {
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontWeight: FontWeight.bold,
-                      fontSize: 12.00.sp
-                  ),
+                      fontSize: 12.00.sp),
                 ),
                 SizedBox(
                   height: 1.00.hp,
@@ -49,12 +62,19 @@ class WithdrawalView extends GetView {
                 SizedBox(
                   width: 81.00.wp,
                   child: TextFormField(
+                    controller: _idController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Ce champs ne peut etre vide";
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                         hintText: "Ex: 12345364789",
                         hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11.00.sp
+                          color: Colors.grey,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11.00.sp,
                         ),
                         filled: true,
                         fillColor: HexColor(MyColors.backgroundColor),
@@ -68,8 +88,7 @@ class WithdrawalView extends GetView {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(color: Colors.white),
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 SizedBox(
@@ -80,8 +99,7 @@ class WithdrawalView extends GetView {
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontWeight: FontWeight.bold,
-                      fontSize: 12.00.sp
-                  ),
+                      fontSize: 12.00.sp),
                 ),
                 SizedBox(
                   height: 1.00.hp,
@@ -90,17 +108,29 @@ class WithdrawalView extends GetView {
                   width: 81.00.wp,
                   child: TextFormField(
                     keyboardType: TextInputType.number,
+                    controller: _amountController,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Ce champs ne peut etre vide";
+                      }
+                      return null;
+                    },
                     decoration: InputDecoration(
                         suffixIcon: Padding(
                           padding: EdgeInsets.all(2.00.hp),
-                          child: Text("cfa", style: TextStyle(fontSize: 18.00.sp, fontWeight: FontWeight.bold)),
+                          child: Text(
+                            "cfa",
+                            style: TextStyle(
+                              fontSize: 18.00.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                         ),
                         hintText: "Ex: 1500",
                         hintStyle: TextStyle(
                             color: Colors.grey,
                             fontWeight: FontWeight.bold,
-                            fontSize: 11.00.sp
-                        ),
+                            fontSize: 11.00.sp),
                         filled: true,
                         fillColor: HexColor(MyColors.backgroundColor),
                         border: OutlineInputBorder(
@@ -113,8 +143,7 @@ class WithdrawalView extends GetView {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                           borderSide: BorderSide(color: Colors.white),
-                        )
-                    ),
+                        )),
                   ),
                 ),
                 SizedBox(
@@ -125,8 +154,7 @@ class WithdrawalView extends GetView {
                   style: TextStyle(
                       color: Colors.black.withOpacity(0.7),
                       fontWeight: FontWeight.bold,
-                      fontSize: 12.00.sp
-                  ),
+                      fontSize: 12.00.sp),
                 ),
                 SizedBox(
                   height: 1.00.hp,
@@ -135,26 +163,27 @@ class WithdrawalView extends GetView {
                   width: 81.00.wp,
                   child: TextFormField(
                     keyboardType: TextInputType.phone,
+                    controller: _phoneController,
                     decoration: InputDecoration(
-                        hintText: "Ex: 13245364",
-                        hintStyle: TextStyle(
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 11.00.sp
-                        ),
-                        filled: true,
-                        fillColor: HexColor(MyColors.backgroundColor),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(18),
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20),
-                          borderSide: BorderSide(color: Colors.white),
-                        )
+                      hintText: "Ex: 13245364",
+                      hintStyle: TextStyle(
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 11.00.sp,
+                      ),
+                      filled: true,
+                      fillColor: HexColor(MyColors.backgroundColor),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(18),
+                        borderSide: BorderSide(color: Colors.white),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -166,18 +195,32 @@ class WithdrawalView extends GetView {
                   height: 6.50.hp,
                   child: TextButton(
                     style: TextButton.styleFrom(
-                        shape:  RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        backgroundColor: HexColor(MyColors.green)
-                    ),
-                    onPressed: () {},
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18)),
+                        backgroundColor: HexColor(MyColors.green)),
+                    onPressed: () async {
+                      if (_formkey.currentState!.validate()) {
+                        setState(() {
+                          _isActive = true;
+                        });
+                        await apiService
+                            .makeDeposit(
+                                _idController.text, _amountController.text)
+                            .then(
+                              (value) => log(value.toString()),
+                            );
+                        setState(() {
+                          _isActive = false;
+                        });
+                      }
+                    },
                     child: Text(
-                          "RETIRER",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13.00.sp,
-                              color: Colors.white
-                          ),
-                        ),
+                      "RETIRER",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 13.00.sp,
+                          color: Colors.white),
+                    ),
                   ),
                 ),
               ],

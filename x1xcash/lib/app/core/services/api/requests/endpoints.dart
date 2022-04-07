@@ -6,4 +6,5 @@ class Endpoints {
   static String makeValidationById = 'api/transaction/make-demand/';
   static String make1xbetTransaction = 'api/wallet/make-1xbet-operation';
   static String getMyWallet = 'api/wallet/by-user';
+  static String transaction = 'api/transaction';
 }
