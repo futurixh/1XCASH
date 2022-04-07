@@ -14,7 +14,9 @@ import 'package:x1xcash/app/modules/widgets/transaction_tile.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
+
+  final homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -35,11 +37,24 @@ class HomeView extends GetView<HomeController> {
               SizedBox(
                 height: 1.00.hp,
               ),
-              Text(
-                "CFA 85,625",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 28.00.sp,
+              Obx(
+                () => Text(
+                  "CFA ${homeController.wallet.value.solde}",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28.00.sp,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 1.00.hp,
+              ),
+              Obx(
+                () => SelectableText(
+                  "${homeController.wallet.value.sId}",
+                  style: const TextStyle(
+                    fontWeight: FontWeight.normal,
+                  ),
                 ),
               ),
               SizedBox(

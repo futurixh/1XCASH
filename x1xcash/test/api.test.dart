@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:x1xcash/app/core/services/api/api.service.dart';
 
 void main(List<String> args) async {

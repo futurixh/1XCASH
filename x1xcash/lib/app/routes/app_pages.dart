@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:x1xcash/app/modules/splash/splash_view.dart';
 
 import '../modules/connection/bindings/connection_binding.dart';
 import '../modules/connection/views/connection_view.dart';
@@ -14,9 +15,13 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.CONNECTION;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
+    GetPage(
+      name: _Paths.SPLASH,
+      page: () => SplashView(),
+    ),
     GetPage(
       name: _Paths.HOME,
       page: () => HomeView(),

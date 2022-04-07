@@ -4,6 +4,7 @@ class RegistrationController extends GetxController {
   //TODO: Implement RegistrationController
 
   final count = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -16,5 +17,6 @@ class RegistrationController extends GetxController {
 
   @override
   void onClose() {}
+
   void increment() => count.value++;
 }

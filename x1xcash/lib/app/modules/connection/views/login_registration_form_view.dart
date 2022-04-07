@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:x1xcash/app/core/services/api/api.service.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
-import 'package:x1xcash/app/modules/home/views/home_view.dart';
 import 'package:x1xcash/app/modules/registration/views/registration_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/transaction_view.dart';
 import 'package:x1xcash/app/modules/widgets/loader_widget.dart';
@@ -29,14 +28,16 @@ import 'package:x1xcash/locator.dart';
 //                   ),
 //                 ),
 
-class ConnectionFormView extends StatefulWidget {
-  ConnectionFormView({Key? key}) : super(key: key);
+class LoginRegistrationFormView extends StatefulWidget {
+  const LoginRegistrationFormView({Key? key}) : super(key: key);
 
   @override
-  State<ConnectionFormView> createState() => _ConnectionFormViewState();
+  State<LoginRegistrationFormView> createState() =>
+      _LoginRegistrationFormViewState();
 }
 
-class _ConnectionFormViewState extends State<ConnectionFormView> {
+class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
+  final _mailController = TextEditingController();
   final _phoneController = TextEditingController();
   final _pwdController = TextEditingController();
   final apiService = locator<ApiService>();
@@ -77,7 +78,7 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                       vertical: 10,
                     ),
                     child: Text(
-                      "Se connecter",
+                      "S'inscrire",
                       style: TextStyle(
                           fontSize: 30.00.sp, fontWeight: FontWeight.bold),
                     ),
@@ -101,6 +102,47 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                             Text(
                               "Please enter",
                               style: TextStyle(fontSize: 20.00.sp),
+                            ),
+                            SizedBox(
+                              height: 3.00.hp,
+                            ),
+                            Text(
+                              "E-mail",
+                              style: TextStyle(fontSize: 13.00.sp),
+                            ),
+                            SizedBox(
+                              width: 81.00.wp,
+                              child: TextFormField(
+                                controller: _mailController,
+                                keyboardType: TextInputType.emailAddress,
+                                style: TextStyle(fontSize: 20.00.sp),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Ce champs ne peut etre vide";
+                                  }
+                                  return null;
+                                },
+                                decoration: InputDecoration(
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 0,
+                                    vertical: 1.00.wp,
+                                  ),
+                                  hintText: "xcash@bet.com",
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey.shade300,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.white),
+                                  ),
+                                ),
+                              ),
                             ),
                             SizedBox(
                               height: 2.00.hp,
@@ -200,7 +242,7 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                                 ),
                               ),
                             ),
-                            const Gap(50),
+                            const Gap(10),
                             SizedBox(
                               width: 80.00.wp,
                               height: 6.50.hp,
@@ -213,18 +255,33 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                                 ),
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
-                                    apiService.phone = _phoneController.text;
+                                    apiService.phone = _mailController.text;
                                     apiService.password = _pwdController.text;
                                     setState(() {
                                       _isActive = true;
                                     });
                                     try {
+                                      await apiService
+                                          .register(
+                                            lastname: _mailController.text
+                                                .split('@')[0],
+                                            firstname: _mailController.text
+                                                .split('@')[0],
+                                            email: apiService.phone!,
+                                            password: apiService.password!,
+                                            telephone: _phoneController.text,
+                                          )
+                                          .then(
+                                            (value) => log(
+                                              value!.toJson().toString(),
+                                            ),
+                                          );
                                       await apiService.login().then(
                                             (value) => log(
                                               value!.toJson().toString(),
                                             ),
                                           );
-                                      Get.to(() => HomeView());
+                                      // Get.to(() => TransactionView());
                                     } catch (e) {
                                       log(e.toString());
                                     }
@@ -237,7 +294,7 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                                 child: _isActive
                                     ? const Loader()
                                     : Text(
-                                        "Je me connecte",
+                                        "Je m'inscris",
                                         style: TextStyle(
                                           fontSize: 15.00.sp,
                                           color: Colors.white,
@@ -245,7 +302,6 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                                       ),
                               ),
                             ),
-                            const Gap(50),
                           ],
                         ),
                       ),
