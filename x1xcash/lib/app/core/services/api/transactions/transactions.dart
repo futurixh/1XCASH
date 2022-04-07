@@ -8,7 +8,31 @@ import '../auth/auth.dart';
 import '../requests/dio.dart';
 
 extension Transactions on ApiService {
-  Future<List<Transaction>?> getTransactions() async {}
+  Future<List<Transaction>> getTransactions() async {
+    List<Transaction> transactions = [];
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.get(
+        Endpoints.transaction,
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      final rawTransactions = response.data['transactions'];
+      for (var i = 0; i < rawTransactions.length; i++) {
+        transactions.add(Transaction.fromJson(rawTransactions[i]));
+      }
+      return transactions;
+    } catch (e) {
+      log(e.toString());
+    }
+    return transactions;
+  }
 
   Future<dynamic> makeDeposit(String xbetId, String amount) async {
     String token = await getBearerToken();
@@ -17,8 +41,8 @@ extension Transactions on ApiService {
       final response = await dio.post(
         Endpoints.make1xbetTransaction,
         data: {
-          "amount": amount,
-          "type": "credit",
+          "amount": int.parse(amount),
+          "type": "deposit",
           "id_1xbet": xbetId,
         },
         options: Options(
@@ -34,16 +58,18 @@ extension Transactions on ApiService {
     }
   }
 
-  Future<dynamic> makeWithdrawal(String xbetId, String amount) async {
+  Future<dynamic> makeWithdrawal(
+      String xbetId, String amount, String clientPhone) async {
     String token = await getBearerToken();
 
     try {
       final response = await dio.post(
         Endpoints.make1xbetTransaction,
         data: {
-          "amount": amount,
-          "type": "debit",
+          "amount": int.parse(amount),
+          "type": "withdrawal",
           "id_1xbet": xbetId,
+          "client_telephone": clientPhone,
         },
         options: Options(
           headers: {

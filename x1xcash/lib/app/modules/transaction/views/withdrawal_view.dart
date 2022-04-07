@@ -6,6 +6,7 @@ import 'package:x1xcash/app/core/services/api/api.service.dart';
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
+import 'package:x1xcash/app/modules/widgets/loader_widget.dart';
 import 'package:x1xcash/locator.dart';
 
 class WithdrawalView extends StatefulWidget {
@@ -44,6 +45,7 @@ class _WithdrawalViewState extends State<WithdrawalView> {
       ),
       body: SafeArea(
         child: Form(
+          key: _formkey,
           child: Padding(
             padding: EdgeInsets.all(5.00.hp),
             child: Column(
@@ -203,24 +205,48 @@ class _WithdrawalViewState extends State<WithdrawalView> {
                         setState(() {
                           _isActive = true;
                         });
-                        await apiService
-                            .makeDeposit(
-                                _idController.text, _amountController.text)
-                            .then(
-                              (value) => log(value.toString()),
-                            );
+                        try {
+                          await apiService
+                              .makeWithdrawal(
+                            _idController.text,
+                            _amountController.text,
+                            _phoneController.text,
+                          )
+                              .then(
+                            (value) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text("Operation reussie"),
+                                ),
+                              );
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/home', (route) => false);
+                            },
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("Une erreur est survenue"),
+                            ),
+                          );
+                        }
+
                         setState(() {
                           _isActive = false;
                         });
                       }
                     },
-                    child: Text(
-                      "RETIRER",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 13.00.sp,
-                          color: Colors.white),
-                    ),
+                    child: _isActive
+                        ? const Loader()
+                        : Text(
+                            "RETIRER",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 13.00.sp,
+                                color: Colors.white),
+                          ),
                   ),
                 ),
               ],

@@ -45,23 +45,28 @@ class Transaction {
 
     return data;
   }
+
+  get styledType => type == 'credit' ? 'Dépôt' : 'Retrait';
 }
 
 class Bet {
   String? id;
   String? type;
+  String? clientTelephone;
 
   Bet({this.id, this.type});
 
   Bet.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
+    clientTelephone = json['client_telephone'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['type'] = type;
+    data['client_telephone'] = clientTelephone;
     return data;
   }
 }

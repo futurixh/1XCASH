@@ -164,19 +164,38 @@ class _DepositViewState extends State<DepositView> {
                         setState(() {
                           _isActive = true;
                         });
-                        await apiService
-                            .makeDeposit(
-                                _idController.text, _amountController.text)
-                            .then(
-                              (value) => log(value.toString()),
-                            );
+                        try {
+                          await apiService
+                              .makeDeposit(
+                                  _idController.text, _amountController.text)
+                              .then(
+                            (value) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text("Operation reussie"),
+                                ),
+                              );
+                              Navigator.of(context).pushNamedAndRemoveUntil(
+                                  '/home', (route) => false);
+                            },
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("Une erreur est survenue"),
+                            ),
+                          );
+                        }
+
                         setState(() {
                           _isActive = false;
                         });
                       }
                     },
                     child: _isActive
-                        ? Loader()
+                        ? const Loader()
                         : Row(
                             children: [
                               Icon(
