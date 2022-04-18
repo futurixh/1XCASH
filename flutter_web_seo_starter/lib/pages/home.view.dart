@@ -14,20 +14,10 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Row(
-        children: [
-          Expanded(
-              child: Container(
-                color: Colors.white,
-              )
-          ),
-          Expanded(
-              flex: 5,
-              child: Container(
-                color: Colors.blue,
-              )
-          )
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [],
+        ),
       ),
     );
   }

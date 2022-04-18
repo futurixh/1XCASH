@@ -36,6 +36,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   qlevar_router: ^1.5.11
   seo_renderer: ^0.6.0
+  flutter_hex_color: ^2.0.0
+  google_fonts: ^2.1.0
+  flutter_svg: ^0.22.0
+  fl_chart: ^0.36.1
+  provider: ^5.0.0
+  data_table_2: ^2.0.3
 
 dev_dependencies:
   flutter_test:
@@ -60,7 +66,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
+    - assets/images/
+    - assets/icons/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

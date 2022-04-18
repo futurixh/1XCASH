@@ -25,10 +25,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'flutter_web_seo',
       theme: ThemeData(
-        colorScheme: ColorScheme.light(
+        colorScheme: const ColorScheme.light(
           primary: Colors.orange,
         ),
-        appBarTheme: AppBarTheme(elevation: 0),
+        appBarTheme: const AppBarTheme(elevation: 0),
       ),
     );
   }
