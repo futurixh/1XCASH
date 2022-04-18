@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_seo/constants.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
 import 'package:flutter_web_seo/routes.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:seo_renderer/helpers/robot_detector_vm.dart';
 
@@ -24,11 +26,11 @@ class MyApp extends StatelessWidget {
       routerDelegate: QRouterDelegate(AppRoutes.routes),
       debugShowCheckedModeBanner: false,
       title: 'flutter_web_seo',
-      theme: ThemeData(
-        colorScheme: const ColorScheme.light(
-          primary: Colors.orange,
-        ),
-        appBarTheme: const AppBarTheme(elevation: 0),
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: bgColor,
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
+            .apply(bodyColor: Colors.white),
+        canvasColor: secondaryColor,
       ),
     );
   }
