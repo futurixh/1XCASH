@@ -3,6 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_web_seo/dashboard_screen.dart';
 import 'package:flutter_web_seo/pages/transaction.view.dart';
+import 'package:flutter_web_seo/pages/transaction_add.view.dart';
+import 'package:flutter_web_seo/pages/transaction_edit.view.dart';
+import 'package:flutter_web_seo/pages/user.view.dart';
+import 'package:flutter_web_seo/pages/user_add.view.dart';
+import 'package:flutter_web_seo/pages/user_edit.view.dart';
+import 'package:flutter_web_seo/pages/wallet.view.dart';
+import 'package:flutter_web_seo/pages/wallet_add.view.dart';
+import 'package:flutter_web_seo/pages/wallet_edit.view.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 class SideMenu extends StatelessWidget {
@@ -15,9 +23,9 @@ class SideMenu extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: [
-          DrawerHeader(
+          const DrawerHeader(
             child: Center(
-              child: Text('1xcash', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
+              child: Text('1xCash', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
             ),
           ),
           DrawerListTile(
@@ -27,47 +35,23 @@ class SideMenu extends StatelessWidget {
             press: () => {QR.toName(DashboardScreen.routeName)},
           ),
           DrawerListTile(
-            active: QR.isCurrentName(TransactionView.routeName) ? true : false,
+            active: QR.isCurrentName(UserView.routeName) ||  QR.isCurrentName(UserEdit.routeName)||  QR.isCurrentName(UserAdd.routeName)  ? true : false,
+            title: UserView.routeName,
+            svgSrc: "assets/icons/menu_profile.svg",
+            press: () => QR.toName(UserView.routeName),
+          ),
+          DrawerListTile(
+            active: QR.isCurrentName(TransactionView.routeName) ||  QR.isCurrentName(TransactionEdit.routeName)||  QR.isCurrentName(TransactionAdd.routeName) ? true : false,
             title: TransactionView.routeName,
             svgSrc: "assets/icons/menu_tran.svg",
             press: () => QR.toName(TransactionView.routeName),
           ),
-/*          DrawerListTile(
-            active: router.routeName == "Task" ? true : false,
-            title: "Task",
-            svgSrc: "assets/icons/menu_task.svg",
-            press: () {},
-          ),
           DrawerListTile(
-            active: router.routeName == "Documents" ? true : false,
-            title: "Documents",
-            svgSrc: "assets/icons/menu_doc.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            active: router.routeName == "Store" ? true : false,
-            title: "Store",
+            active: QR.isCurrentName(WalletView.routeName) ||  QR.isCurrentName(WalletEdit.routeName)||  QR.isCurrentName(WalletAdd.routeName)  ? true : false,
+            title: WalletView.routeName,
             svgSrc: "assets/icons/menu_store.svg",
-            press: () {},
+            press: () => QR.toName(WalletView.routeName),
           ),
-          DrawerListTile(
-            active: router.routeName == "Notification" ? true : false,
-            title: "Notification",
-            svgSrc: "assets/icons/menu_notification.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            active: router.routeName == "Profile" ? true : false,
-            title: "Profile",
-            svgSrc: "assets/icons/menu_profile.svg",
-            press: () {},
-          ),
-          DrawerListTile(
-            active: router.routeName == "Settings" ? true : false,
-            title: "Settings",
-            svgSrc: "assets/icons/menu_setting.svg",
-            press: () {},
-          ),*/
         ],
       ),
     );

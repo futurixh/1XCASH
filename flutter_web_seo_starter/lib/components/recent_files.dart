@@ -2,6 +2,7 @@ import 'package:flutter_web_seo/models/RecentFile.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:qlevar_router/qlevar_router.dart';
 
 import '../../../constants.dart';
 
@@ -10,13 +11,16 @@ class RecentFiles extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    ScrollController _controller = ScrollController();
+
     return Container(
       padding: EdgeInsets.all(defaultPadding),
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: secondaryColor,
-        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -28,6 +32,7 @@ class RecentFiles extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: DataTable2(
+              scrollController: _controller,
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
@@ -40,6 +45,9 @@ class RecentFiles extends StatelessWidget {
                 DataColumn(
                   label: Text("Size"),
                 ),
+                DataColumn(
+                    label: Text("Action")
+                )
               ],
               rows: List.generate(
                 demoRecentFiles.length,
@@ -73,6 +81,15 @@ DataRow recentFileDataRow(RecentFile fileInfo) {
       ),
       DataCell(Text(fileInfo.date!)),
       DataCell(Text(fileInfo.size!)),
+      DataCell(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          IconButton(onPressed: () {QR.to("/transaction/edit/2");}, icon: const Icon(Icons.edit), iconSize: 18.00),
+          IconButton(onPressed: () {}, icon: const Icon(Icons.delete), iconSize: 18.00),
+        ],
+      )),
     ],
   );
 }

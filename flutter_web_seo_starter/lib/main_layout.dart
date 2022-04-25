@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_seo/components/header.dart';
+import 'package:flutter_web_seo/constants.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
 import 'package:flutter_web_seo/responsive.dart';
 import 'package:flutter_web_seo/side_menu.dart';
@@ -6,7 +8,8 @@ import 'package:qlevar_router/qlevar_router.dart';
 
 class MainLayout extends StatefulWidget {
   final Widget widget;
-  const MainLayout({Key? key, required this.widget}) : super(key: key);
+  final String pageName;
+  const MainLayout({Key? key, required this.widget, required this.pageName}) : super(key: key);
 
   @override
   State<MainLayout> createState() => _MainLayoutState();
@@ -32,7 +35,18 @@ class _MainLayoutState extends State<MainLayout> {
             Expanded(
               // It takes 5/6 part of the screen
               flex: 5,
-              child: widget.widget,
+              child: SafeArea(
+                child: SingleChildScrollView(
+                  padding: EdgeInsets.all(defaultPadding),
+                  child: Column(
+                    children: [
+                      Header(pageName: widget.pageName),
+                      SizedBox(height: 100.00),
+                      widget.widget
+                    ],
+                  ),
+                ),
+              )
             ),
           ],
         ),

@@ -10,33 +10,13 @@ class DashboardScreen extends StatelessWidget {
 
   DashboardScreen({Key? key}) : super(key: key);
   @override
-
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(defaultPadding),
-        child: Column(
-          children: [
-            Header(),
-            SizedBox(height: defaultPadding),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    children: [
-                      MyFiles(),
-                      SizedBox(height: defaultPadding),
-                      RecentFiles(),
-                    ],
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
+    return Column(
+      children: [
+        MyFiles(),
+        SizedBox(height: defaultPadding),
+        RecentFiles(),
+      ],
     );
   }
 }

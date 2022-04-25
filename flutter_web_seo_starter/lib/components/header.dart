@@ -6,9 +6,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../constants.dart';
 
 class Header extends StatelessWidget {
-  const Header({
-    Key? key,
+  Header({
+    Key? key, required this.pageName,
   }) : super(key: key);
+
+  final String pageName;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class Header extends StatelessWidget {
           ),
         if (!Responsive.isMobile(context))
           Text(
-            "Dashboard",
+            pageName,
             style: Theme.of(context).textTheme.headline6,
           ),
         if (!Responsive.isMobile(context))
@@ -53,9 +55,10 @@ class ProfileCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(
-            "assets/images/profile_pic.png",
-            height: 38,
+          SvgPicture.asset(
+            "icons/profile-user.svg",
+            color: Colors.white,
+            height: 20,
           ),
           if (!Responsive.isMobile(context))
             Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_seo/components/transactions_table.dart';
 
 class TransactionView extends StatefulWidget {
   const TransactionView({Key? key}) : super(key: key);
@@ -12,12 +13,10 @@ class TransactionView extends StatefulWidget {
 class _TransactionViewState extends State<TransactionView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [],
-        ),
-      ),
+    return Column(
+      children: [
+        TransactionsTable(),
+      ],
     );
   }
 }
