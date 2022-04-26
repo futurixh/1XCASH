@@ -1,0 +1,30 @@
+name: x1xcash
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.1
+  flutter_hex_color: 2.0.0
+  google_fonts: 2.3.1
+  flutter: 
+    sdk: flutter
+  dio: ^4.0.6
+  shared_preferences: ^2.0.13
+  flutter_secure_storage: ^5.0.2
+  gap: ^2.0.0
+  get_it: ^7.2.0
+
+dev_dependencies: 
+  flutter_lints: ^1.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  assets: 
+    - assets/images/
+  uses-material-design: true
+
