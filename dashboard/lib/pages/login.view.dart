@@ -1,11 +1,13 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/constants.dart';
 import 'package:flutter_web_seo/services/api/api.service.dart';
 import 'package:flutter_web_seo/services/api/auth/auth.dart';
+import 'package:flutter_web_seo/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../locator.dart';
@@ -28,30 +30,31 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    GetSizePerScreen().init(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(color: bgColor),
+          decoration: const BoxDecoration(color: bgColor),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
-                height: 150,
+              SizedBox(
+                height: 15.00.hp,
               ),
               Text('1xCash',
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 8.00.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
-              const SizedBox(
-                height: 60,
+              SizedBox(
+                height: 5.00.hp,
               ),
               Container(
-                height: 550,
-                width: 700,
-                decoration: BoxDecoration(
+                height: 50.00.hp,
+                width: 40.00.wp,
+                decoration: const BoxDecoration(
                   color: secondaryColor,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                 ),
@@ -60,20 +63,20 @@ class _LoginViewState extends State<LoginView> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 50,
+                        height: 5.00.hp,
                       ),
                       Text('Login',
                           style: TextStyle(
-                              fontSize: 20,
+                              fontSize: 3.50.sp,
                               fontWeight: FontWeight.bold,
                               color: Colors.white)),
                       SizedBox(
-                        height: 50,
+                        height: 5.00.hp,
                       ),
                       Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(2.0.hp),
                           child: SizedBox(
-                              width: 550,
+                              width: 30.00.wp,
                               child: TextFormField(
                                 controller: _phoneController,
                                 validator: (value) {
@@ -115,9 +118,9 @@ class _LoginViewState extends State<LoginView> {
                             ),
                           ),
                       Padding(
-                          padding: EdgeInsets.all(16.0),
+                          padding: EdgeInsets.all(2.00.hp),
                           child: SizedBox(
-                            width: 550,
+                            width: 30.00.wp,
                             child: TextFormField(
                               obscureText: _isObscure,
                               controller: _pwdController,
@@ -154,12 +157,12 @@ class _LoginViewState extends State<LoginView> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(10)),
                                 ),
-                                errorBorder: OutlineInputBorder(
+                                errorBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                                 ),
-                                focusedErrorBorder: OutlineInputBorder(
+                                focusedErrorBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.red),
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
@@ -171,28 +174,28 @@ class _LoginViewState extends State<LoginView> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 370,
+                            width: 21.00.wp,
                           ),
                           RichText(
                               text: TextSpan(
                                   text: "Forgot your password ?",
                                   style: TextStyle(
                                       color: Colors.grey,
-                                      fontSize: 16,
+                                      fontSize: 2.60.sp,
                                       fontWeight: FontWeight.bold),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {})),
                         ],
                       ),
-                      SizedBox(height: 50),
+                      SizedBox(height: 5.0.hp),
                       ElevatedButton(
                         style: TextButton.styleFrom(
                           shape: const RoundedRectangleBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(12))),
                           padding: EdgeInsets.symmetric(
-                            horizontal: defaultPadding * 14.5,
-                            vertical: defaultPadding /
+                            horizontal: 12.00.wp,
+                            vertical: 1.60.hp /
                                 (Responsive.isMobile(context) ? 2 : 0.7),
                           ),
                         ),
@@ -205,20 +208,26 @@ class _LoginViewState extends State<LoginView> {
                             });
                             try {
                               await apiService.login().then(
-                                    (value) => print(
-                                  value!.toJson().toString(),
-                                ),
+                                    (value) {
+                                      if (kDebugMode) {
+                                        print(
+                                        value!.toJson().toString(),
+                                      );
+                                      }
+                                    },
                               );
                               QR.to('/');
                             } catch (e) {
-                              print(e.toString());
+                              if (kDebugMode) {
+                                print(e.toString());
+                              }
                             }
                             setState(() {
                               _isActive = false;
                             });
                           }
                         },
-                        child: _isActive ? const Loader() : Text("Se connecter"),
+                        child: _isActive ? const Loader() : const Text("Se connecter"),
                       ),
                     ],
                   ),

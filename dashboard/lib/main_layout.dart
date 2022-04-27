@@ -17,20 +17,20 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
-  ScrollController _controller = ScrollController();
+  final ScrollController _controller = ScrollController();
   @override
 
   Widget build(BuildContext context) {
     GetSizePerScreen().init(context);
     return Scaffold(
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // We want this side menu only for large screen
             if (Responsive.isDesktop(context))
-              Expanded(
+              const Expanded(
                 // default flex = 1
                 // and it takes 1/6 part of the screen
                 child: SideMenu(),
@@ -41,11 +41,11 @@ class _MainLayoutState extends State<MainLayout> {
               child: SafeArea(
                 child: SingleChildScrollView(
                   controller: _controller,
-                  padding: EdgeInsets.all(defaultPadding),
+                  padding: EdgeInsets.all(3.00.hp),
                   child: Column(
                     children: [
                       Header(pageName: widget.pageName),
-                      SizedBox(height: 100.00),
+                      SizedBox(height: 10.00.hp),
                       widget.widget
                     ],
                   ),

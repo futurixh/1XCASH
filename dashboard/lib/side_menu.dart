@@ -1,5 +1,8 @@
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_web_seo/dashboard_screen.dart';
 import 'package:flutter_web_seo/pages/demand.view.dart';
@@ -14,60 +17,96 @@ import 'package:flutter_web_seo/pages/user_edit.view.dart';
 import 'package:flutter_web_seo/pages/wallet.view.dart';
 import 'package:flutter_web_seo/pages/wallet_add.view.dart';
 import 'package:flutter_web_seo/pages/wallet_edit.view.dart';
+import 'package:flutter_web_seo/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-class SideMenu extends StatelessWidget {
+import 'models/user.model.dart';
+
+class SideMenu extends StatefulWidget {
   const SideMenu({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<SideMenu> createState() => _SideMenuState();
+}
+
+class _SideMenuState extends State<SideMenu> {
+
+  static const storage = FlutterSecureStorage();
+  User? currentUser;
+
+  Future getCurrentUser() async {
+    await storage.read(key: 'user').
+    then((value) {
+      if (mounted) {
+        setState(() {
+          currentUser = User.fromJson(json.decode(value!));
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         children: [
-          const DrawerHeader(
+          DrawerHeader(
             child: Center(
-              child: Text('1xCash', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),),
+              child: Text('1xCash', style: TextStyle(fontSize: 4.00.sp, fontWeight: FontWeight.bold, color: Colors.white),),
             ),
           ),
           DrawerListTile(
+            visible: true,
             active: QR.isCurrentName(DashboardScreen.routeName) ? true : false,
             title: DashboardScreen.routeName,
             svgSrc: "assets/icons/menu_dashbord.svg",
             press: () => {QR.toName(DashboardScreen.routeName)},
           ),
           DrawerListTile(
+            visible: currentUser?.role == "admin" ? true : false,
             active: QR.isCurrentName(UserView.routeName) ||  QR.isCurrentName(UserEdit.routeName)||  QR.isCurrentName(UserAdd.routeName)  ? true : false,
             title: UserView.routeName,
             svgSrc: "assets/icons/menu_profile.svg",
             press: () => QR.toName(UserView.routeName),
           ),
           DrawerListTile(
+            visible: currentUser?.role == "admin" ? true : false,
             active: QR.isCurrentName(TransactionView.routeName) ||  QR.isCurrentName(TransactionEdit.routeName)||  QR.isCurrentName(TransactionAdd.routeName) ? true : false,
             title: TransactionView.routeName,
             svgSrc: "assets/icons/menu_tran.svg",
             press: () => QR.toName(TransactionView.routeName),
           ),
           DrawerListTile(
+            visible: currentUser?.role == "admin" ? true : false,
             active: QR.isCurrentName(WalletView.routeName) ||  QR.isCurrentName(WalletEdit.routeName)||  QR.isCurrentName(WalletAdd.routeName)  ? true : false,
             title: WalletView.routeName,
             svgSrc: "assets/icons/menu_store.svg",
             press: () => QR.toName(WalletView.routeName),
           ),
           DrawerListTile(
+            visible: currentUser?.role == "super-merchant" || currentUser?.role == "merchant"  ? true : false,
             active: QR.isCurrentName(DemandView.routeName)  ? true : false,
             title: DemandView.routeName,
             svgSrc: "assets/icons/money.svg",
             press: () => QR.toName(DemandView.routeName),
           ),
           DrawerListTile(
+            visible: (currentUser?.role == "super-merchant" || currentUser?.role == "admin")  ? true : false,
             active: QR.isCurrentName(OperationView.routeName)  ? true : false,
             title: OperationView.routeName,
             svgSrc: "assets/icons/process.svg",
             press: () => QR.toName(OperationView.routeName),
           ),
           DrawerListTile(
+            visible: (currentUser?.role == "super-merchant" || currentUser?.role == "admin") ? true : false,
             active: QR.isCurrentName(OperationBetView.routeName)  ? true : false,
             title: OperationBetView.routeName,
             svgSrc: "assets/icons/chips-bet.svg",
@@ -87,25 +126,29 @@ class DrawerListTile extends StatelessWidget {
     required this.svgSrc,
     required this.press,
     required this.active,
+    required this.visible,
   }) : super(key: key);
 
   final String title, svgSrc;
   final VoidCallback press;
-  final bool active;
+  final bool active, visible;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: press,
-      horizontalTitleGap: 0.0,
-      leading: SvgPicture.asset(
-        svgSrc,
-        color: active ? Colors.white : Colors.white54,
-        height: 16,
-      ),
-      title: Text(
-        title,
-        style: TextStyle(color: active ? Colors.white : Colors.white54),
+    return Visibility(
+      visible: visible,
+      child: ListTile(
+        onTap: press,
+        horizontalTitleGap: 0.0,
+        leading: SvgPicture.asset(
+          svgSrc,
+          color: active ? Colors.white : Colors.white54,
+          height: 1.80.hp,
+        ),
+        title: Text(
+          title,
+          style: TextStyle(color: active ? Colors.white : Colors.white54),
+        ),
       ),
     );
   }

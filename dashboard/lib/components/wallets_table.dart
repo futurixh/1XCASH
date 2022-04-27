@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/models/RecentFile.dart';
 import 'package:flutter_web_seo/services/api/wallet/wallet.dart';
+import 'package:flutter_web_seo/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../locator.dart';
@@ -79,20 +78,20 @@ class _WalletsTableState extends State<WalletsTable> {
             ElevatedButton.icon(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
+                  horizontal: 1.50.wp * 1.5,
                   vertical:
-                  defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                  2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
               onPressed: () {QR.to("/wallet/add");},
-              icon: Icon(Icons.add),
-              label: Text("Ajouter"),
+              icon: const Icon(Icons.add),
+              label: const Text("Ajouter"),
             ),
           ],
         ),
-        SizedBox(height: 20.00),
+        SizedBox(height: 2.00.hp),
         Container(
-          padding: const EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(2.00.hp),
           decoration: const BoxDecoration(
             color: secondaryColor,
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -103,9 +102,9 @@ class _WalletsTableState extends State<WalletsTable> {
               SizedBox(
                 width: double.infinity,
                 child: DataTable2(
-                  empty: _isActive ? Loader() : Text("No Data"),
-                  columnSpacing: defaultPadding,
-                  minWidth: 600,
+                  empty: _isActive ? const Loader() : const Text("No Data"),
+                  columnSpacing: 2.00.hp,
+                  minWidth: 6.00.wp,
                   columns: const [
                     DataColumn2(
                       label: Text("Solde"),
@@ -139,8 +138,8 @@ DataRow walletsDataRow(Wallet wallet) {
       DataCell(
           Row(
             children: [
-              IconButton(onPressed: () {QR.to("/wallet/edit/${wallet.sId!}");}, icon: const Icon(Icons.edit), iconSize: 18.00),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.delete), iconSize: 18.00),
+              IconButton(onPressed: () {QR.to("/wallet/edit/${wallet.sId!}");}, icon: const Icon(Icons.edit), iconSize: 2.00.hp),
+              IconButton(onPressed: () {}, icon: const Icon(Icons.delete), iconSize: 2.00.hp),
             ],
           )),
     ],

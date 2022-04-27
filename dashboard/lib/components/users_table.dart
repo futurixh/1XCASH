@@ -4,13 +4,11 @@ import 'dart:developer';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/models/RecentFile.dart';
 import 'package:flutter_web_seo/models/user.model.dart';
-import 'package:flutter_web_seo/models/users.dart';
 import 'package:flutter_web_seo/services/api/user/user.dart';
+import 'package:flutter_web_seo/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../locator.dart';
@@ -84,20 +82,20 @@ class _UsersTableState extends State<UsersTable> {
             ElevatedButton.icon(
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
-                  horizontal: defaultPadding * 1.5,
+                  horizontal: 1.50.wp * 1.5,
                   vertical:
-                  defaultPadding / (Responsive.isMobile(context) ? 2 : 1),
+                  2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
               onPressed: () {QR.to("/user/add"); },
-              icon: Icon(Icons.add),
-              label: Text("Ajouter"),
+              icon: const Icon(Icons.add),
+              label: const Text("Ajouter"),
             ),
           ],
         ),
-        SizedBox(height: 20.00),
+        SizedBox(height: 2.00.hp),
         Container(
-          padding: const EdgeInsets.all(defaultPadding),
+          padding: EdgeInsets.all(2.00.hp),
           decoration: const BoxDecoration(
             color: secondaryColor,
             borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -108,9 +106,9 @@ class _UsersTableState extends State<UsersTable> {
               SizedBox(
                 width: double.infinity,
                 child: DataTable2(
-                  empty: _isActive ? Loader() : Text("No Data"),
-                  columnSpacing: defaultPadding,
-                  minWidth: 600,
+                  empty: _isActive ? const Loader() : const Text("No Data"),
+                  columnSpacing: 2.00.hp,
+                  minWidth: 6.00.wp,
                   columns: const [
                     DataColumn2(
                       label: Text("Nom"),
@@ -147,13 +145,13 @@ class _UsersTableState extends State<UsersTable> {
 }
 
 DataRow usersDataRow(User user) {
-  return DataRow(
+  return DataRow2(
     cells: [
       DataCell(
         Row(
           children: [
             Text(user.lastname!),
-            SizedBox(width: 5,),
+            SizedBox(width: 0.50.wp),
             Text(user.firstname!)
           ],
         ),
@@ -165,9 +163,11 @@ DataRow usersDataRow(User user) {
       DataCell(
           Row(
             children: [
-              IconButton(onPressed: () {QR.to("/user/edit/${user.sId!}");}, icon: const Icon(Icons.edit), iconSize: 18.00),
+              IconButton(onPressed: () {
+                QR.to("/user/edit/${user.sId!}");
+                }, icon: const Icon(Icons.edit), iconSize: 2.00.hp),
               IconButton(onPressed: () async {
-              }, icon: const Icon(Icons.delete), iconSize: 18.00),
+              }, icon: const Icon(Icons.delete), iconSize: 2.00.hp),
             ],
           )),
     ],

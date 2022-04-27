@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/constants.dart';
+import 'package:flutter_web_seo/sizeconf.dart';
 
 import '../responsive.dart';
 
@@ -16,7 +17,7 @@ class _OperationBetViewState extends State<OperationBetView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(defaultPadding),
+      padding: EdgeInsets.all(2.00.hp),
       decoration: const BoxDecoration(
         color: secondaryColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -30,24 +31,24 @@ class _OperationBetViewState extends State<OperationBetView> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(2.00.hp),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                           child: Text(
                               "Amount",
-                              style: TextStyle(fontSize: 20, color: Colors.white)
+                              style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
                           ),
-                          margin: EdgeInsets.only(left: 0, bottom: 0),
+                          margin: const EdgeInsets.only(left: 0, bottom: 0),
                           alignment: Alignment.centerLeft
                       ),
                       SizedBox(
-                        width: 30,
+                        width: 3.00.wp,
                       ),
-                      const SizedBox(
-                        width: 800,
-                        child: TextField(
+                      SizedBox(
+                        width: 40.00.wp,
+                        child: const TextField(
                           decoration: InputDecoration(
                             hintText: "5233",
                             fillColor: secondaryColor,
@@ -66,24 +67,24 @@ class _OperationBetViewState extends State<OperationBetView> {
                     ],),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(2.00.hp),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                           child: Text(
                               "Id 1xbet",
-                              style: TextStyle(fontSize: 20, color: Colors.white)
+                              style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
                           ),
-                          margin: EdgeInsets.only(left: 0, bottom: 0),
+                          margin: const EdgeInsets.only(left: 0, bottom: 0),
                           alignment: Alignment.centerLeft
                       ),
                       SizedBox(
-                        width: 30,
+                        width: 3.00.wp,
                       ),
-                      const SizedBox(
-                        width: 800,
-                        child: TextField(
+                      SizedBox(
+                        width: 40.00.wp,
+                        child: const TextField(
                           decoration: InputDecoration(
                             hintText: "14533284562",
                             fillColor: secondaryColor,
@@ -102,25 +103,25 @@ class _OperationBetViewState extends State<OperationBetView> {
                     ],),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding:  EdgeInsets.all(2.00.hp),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                           child: Text(
                               "Transaction Type",
-                              style: TextStyle(fontSize: 20, color: Colors.white)
+                              style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
                           ),
-                          margin: EdgeInsets.only(left: 0, bottom: 0),
+                          margin: const EdgeInsets.only(left: 0, bottom: 0),
                           alignment: Alignment.centerLeft
                       ),
                       SizedBox(
-                        width: 30,
+                        width: 3.00.wp,
                       ),
                       SizedBox(
-                          width: 800,
+                          width: 40.0.wp,
                           child: DropdownButtonFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               fillColor: secondaryColor,
                               filled: true,
                               focusedBorder: OutlineInputBorder(
@@ -144,32 +145,32 @@ class _OperationBetViewState extends State<OperationBetView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(1.00.hp),
                 child: ElevatedButton(
                   style: TextButton.styleFrom(
                     padding: EdgeInsets.symmetric(
-                      horizontal: defaultPadding * 1.5,
+                      horizontal: 2.00.wp * 1.5,
                       vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 0.7),
+                      1.80.hp / (Responsive.isMobile(context) ? 2 : 0.7),
                     ),
                   ),
                   onPressed: () {},
-                  child: Text("Enregistrer"),
+                  child: const Text("Enregistrer"),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(1.00.hp),
                 child: ElevatedButton(
                   style: TextButton.styleFrom(
                     backgroundColor: Colors.red,
                     padding: EdgeInsets.symmetric(
-                      horizontal: defaultPadding * 1.5,
+                      horizontal: 2.00.wp * 1.5,
                       vertical:
-                      defaultPadding / (Responsive.isMobile(context) ? 2 : 0.7),
+                      1.80.hp / (Responsive.isMobile(context) ? 2 : 0.7),
                     ),
                   ),
                   onPressed: () {},
-                  child: Text("Quitter"),
+                  child: const Text("Quitter"),
                 ),
               ),
             ],
