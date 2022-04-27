@@ -4,6 +4,7 @@ import 'package:flutter_web_seo/constants.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
 import 'package:flutter_web_seo/responsive.dart';
 import 'package:flutter_web_seo/side_menu.dart';
+import 'package:flutter_web_seo/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 class MainLayout extends StatefulWidget {
@@ -16,9 +17,11 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
+  ScrollController _controller = ScrollController();
   @override
 
   Widget build(BuildContext context) {
+    GetSizePerScreen().init(context);
     return Scaffold(
       drawer: SideMenu(),
       body: SafeArea(
@@ -37,6 +40,7 @@ class _MainLayoutState extends State<MainLayout> {
               flex: 5,
               child: SafeArea(
                 child: SingleChildScrollView(
+                  controller: _controller,
                   padding: EdgeInsets.all(defaultPadding),
                   child: Column(
                     children: [

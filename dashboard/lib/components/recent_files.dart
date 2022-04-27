@@ -14,7 +14,6 @@ class RecentFiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _controller = ScrollController();
 
     return Container(
       padding: EdgeInsets.all(defaultPadding),
@@ -32,7 +31,6 @@ class RecentFiles extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: DataTable2(
-              scrollController: _controller,
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [

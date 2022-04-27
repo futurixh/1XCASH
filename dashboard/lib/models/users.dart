@@ -1,11 +1,11 @@
-class User {
+class Use {
   final String? id, firstname, lastname, email, telephone, role;
   final bool? verified;
 
-  User({this.id, this.firstname, this.lastname, this.email, this.telephone, this.role, this.verified});
+  Use({this.id, this.firstname, this.lastname, this.email, this.telephone, this.role, this.verified});
 }
 List demoUsers = [
-  User(
+  Use(
     id: "1",
     firstname: "Vitou",
     lastname: "Kilian",
@@ -14,7 +14,7 @@ List demoUsers = [
     role: "admin",
     verified: true
   ),
-  User(
+  Use(
       id: "2",
       firstname: "Vitou",
       lastname: "Kilian",
@@ -23,7 +23,7 @@ List demoUsers = [
       role: "admin",
       verified: true
   ),
-  User(
+  Use(
       id: "3",
       firstname: "Vitou",
       lastname: "Kilian",
@@ -32,7 +32,7 @@ List demoUsers = [
       role: "admin",
       verified: true
   ),
-  User(
+  Use(
       id: "4",
       firstname: "Vitou",
       lastname: "Kilian",
@@ -41,7 +41,7 @@ List demoUsers = [
       role: "admin",
       verified: true
   ),
-  User(
+  Use(
       id: "5",
       firstname: "Vitou",
       lastname: "Kilian",
@@ -50,7 +50,7 @@ List demoUsers = [
       role: "admin",
       verified: true
   ),
-  User(
+  Use(
       id: "6",
       firstname: "Vitou",
       lastname: "Kilian",

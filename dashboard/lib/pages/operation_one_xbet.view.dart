@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/responsive.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 
-class WalletAdd extends StatefulWidget {
-  static String routeName = "Wallet Add";
-  const WalletAdd({Key? key}) : super(key: key);
+import '../responsive.dart';
+
+class OperationBetView extends StatefulWidget {
+  static String routeName = "Operation 1xBet";
+  const OperationBetView({Key? key}) : super(key: key);
 
   @override
-  State<WalletAdd> createState() => _WalletAddState();
+  State<OperationBetView> createState() => _OperationBetViewState();
 }
 
-class _WalletAddState extends State<WalletAdd> {
+class _OperationBetViewState extends State<OperationBetView> {
   final TextEditingController _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _WalletAddState extends State<WalletAdd> {
                     children: [
                       Container(
                           child: Text(
-                              "Solde",
+                              "Amount",
                               style: TextStyle(fontSize: 20, color: Colors.white)
                           ),
                           margin: EdgeInsets.only(left: 0, bottom: 0),
@@ -73,7 +72,43 @@ class _WalletAddState extends State<WalletAdd> {
                     children: [
                       Container(
                           child: Text(
-                              "User",
+                              "Id 1xbet",
+                              style: TextStyle(fontSize: 20, color: Colors.white)
+                          ),
+                          margin: EdgeInsets.only(left: 0, bottom: 0),
+                          alignment: Alignment.centerLeft
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      const SizedBox(
+                        width: 800,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: "14533284562",
+                            fillColor: secondaryColor,
+                            filled: true,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:  BorderRadius.all(Radius.circular(10)),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                          child: Text(
+                              "Transaction Type",
                               style: TextStyle(fontSize: 20, color: Colors.white)
                           ),
                           margin: EdgeInsets.only(left: 0, bottom: 0),
@@ -96,23 +131,8 @@ class _WalletAddState extends State<WalletAdd> {
                                 borderSide: BorderSide(color: Colors.grey),
                                 borderRadius:  BorderRadius.all(Radius.circular(10)),
                               ),
-                            ), items: menuItems, onChanged: (Object? value) {  },
+                            ), items: typeItems, onChanged: (Object? value) {  },
                           )
-                        /*TextField(
-                          decoration: InputDecoration(
-                            hintText: "merchant",
-                            fillColor: secondaryColor,
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius:  BorderRadius.all(Radius.circular(10)),
-                            ),
-                          ),
-                        ),*/
                       )
                     ],),
                 ),
@@ -148,7 +168,7 @@ class _WalletAddState extends State<WalletAdd> {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 0.7),
                     ),
                   ),
-                  onPressed: () {QR.to("/wallet");},
+                  onPressed: () {},
                   child: Text("Quitter"),
                 ),
               ),
@@ -160,7 +180,7 @@ class _WalletAddState extends State<WalletAdd> {
   }
 }
 
-List<DropdownMenuItem<String>> menuItems = [
-  DropdownMenuItem(child: Text("Kilian Vitou"),value: "1"),
-  DropdownMenuItem(child: Text("Junior Medehou"),value: "2"),
+List<DropdownMenuItem<String>> typeItems = [
+  DropdownMenuItem(child: Text("Deposit"),value: "deposit"),
+  DropdownMenuItem(child: Text("Withdrawal"),value: "withdrawal"),
 ];

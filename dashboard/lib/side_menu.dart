@@ -2,6 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_web_seo/dashboard_screen.dart';
+import 'package:flutter_web_seo/pages/demand.view.dart';
+import 'package:flutter_web_seo/pages/operation.view.dart';
+import 'package:flutter_web_seo/pages/operation_one_xbet.view.dart';
 import 'package:flutter_web_seo/pages/transaction.view.dart';
 import 'package:flutter_web_seo/pages/transaction_add.view.dart';
 import 'package:flutter_web_seo/pages/transaction_edit.view.dart';
@@ -51,6 +54,24 @@ class SideMenu extends StatelessWidget {
             title: WalletView.routeName,
             svgSrc: "assets/icons/menu_store.svg",
             press: () => QR.toName(WalletView.routeName),
+          ),
+          DrawerListTile(
+            active: QR.isCurrentName(DemandView.routeName)  ? true : false,
+            title: DemandView.routeName,
+            svgSrc: "assets/icons/money.svg",
+            press: () => QR.toName(DemandView.routeName),
+          ),
+          DrawerListTile(
+            active: QR.isCurrentName(OperationView.routeName)  ? true : false,
+            title: OperationView.routeName,
+            svgSrc: "assets/icons/process.svg",
+            press: () => QR.toName(OperationView.routeName),
+          ),
+          DrawerListTile(
+            active: QR.isCurrentName(OperationBetView.routeName)  ? true : false,
+            title: OperationBetView.routeName,
+            svgSrc: "assets/icons/chips-bet.svg",
+            press: () => QR.toName(OperationBetView.routeName),
           ),
         ],
       ),

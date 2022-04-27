@@ -1,14 +1,70 @@
+import 'dart:convert';
+
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/constants.dart';
 import 'package:flutter_web_seo/models/RecentFile.dart';
-import 'package:flutter_web_seo/models/transactions.dart';
 import 'package:flutter_web_seo/responsive.dart';
+import 'package:flutter_web_seo/services/api/transaction/transaction.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-class TransactionsTable extends StatelessWidget {
+import '../locator.dart';
+import '../models/transaction.model.dart';
+import '../models/user.model.dart';
+import '../services/api/api.service.dart';
+
+final apiService = locator<ApiService>();
+
+class TransactionsTable extends StatefulWidget {
   const TransactionsTable({Key? key}) : super(key: key);
+
+  @override
+  State<TransactionsTable> createState() => _TransactionsTableState();
+}
+
+class _TransactionsTableState extends State<TransactionsTable> {
+
+  static const storage = FlutterSecureStorage();
+
+  bool _isActive = false;
+  List transactions = <Transaction>[];
+  User? currentUser;
+
+  Future getCurrentUser() async {
+    await storage.read(key: 'user').
+    then((value) {
+      if (mounted) {
+        setState(() {
+          currentUser = User.fromJson(json.decode(value!));
+        });
+      }
+    });
+  }
+
+  Future getTransactions() async {
+    setState(() {
+      _isActive = true;
+    });
+    await apiService.getTransactions().
+    then((value) {
+      if (mounted) {
+        setState(() {
+          transactions = value;
+          _isActive = false;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getTransactions();
+    getCurrentUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +104,7 @@ class TransactionsTable extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: DataTable2(
+                  empty: _isActive ? Loader() : Text("No Data"),
                   columnSpacing: defaultPadding,
                   minWidth: 600,
                   columns: const [
@@ -61,15 +118,15 @@ class TransactionsTable extends StatelessWidget {
                       label: Text("Status"),
                     ),
                     DataColumn2(
-                        label: Text("Wallet")
+                        label: Text("Wallet Id")
                     ),
                     DataColumn2(
                         label: Text("Action")
                     ),
                   ],
                   rows: List.generate(
-                    demoTransaction.length,
-                        (index) => transactionsDataRow(demoTransaction[index]),
+                    transactions.length,
+                        (index) => transactionsDataRow(transactions[index]),
                   ),
                 ),
               ),
@@ -91,7 +148,7 @@ DataRow transactionsDataRow(Transaction transaction) {
       DataCell(
           Row(
             children: [
-              IconButton(onPressed: () {QR.to("/transaction/edit/${transaction.id!}");}, icon: const Icon(Icons.edit), iconSize: 18.00),
+              IconButton(onPressed: () {QR.to("/transaction/edit/${transaction.sId!}");}, icon: const Icon(Icons.edit), iconSize: 18.00),
               IconButton(onPressed: () {}, icon: const Icon(Icons.delete), iconSize: 18.00),
             ],
           )),

@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/responsive.dart';
-import 'package:qlevar_router/qlevar_router.dart';
 
-class WalletAdd extends StatefulWidget {
-  static String routeName = "Wallet Add";
-  const WalletAdd({Key? key}) : super(key: key);
+import '../responsive.dart';
+
+class OperationView extends StatefulWidget {
+  static String routeName = "Operation";
+  const OperationView({Key? key}) : super(key: key);
 
   @override
-  State<WalletAdd> createState() => _WalletAddState();
+  State<OperationView> createState() => _OperationViewState();
 }
 
-class _WalletAddState extends State<WalletAdd> {
+class _OperationViewState extends State<OperationView> {
   final TextEditingController _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _WalletAddState extends State<WalletAdd> {
                     children: [
                       Container(
                           child: Text(
-                              "Solde",
+                              "Amount",
                               style: TextStyle(fontSize: 20, color: Colors.white)
                           ),
                           margin: EdgeInsets.only(left: 0, bottom: 0),
@@ -73,7 +72,7 @@ class _WalletAddState extends State<WalletAdd> {
                     children: [
                       Container(
                           child: Text(
-                              "User",
+                              "Transaction Type",
                               style: TextStyle(fontSize: 20, color: Colors.white)
                           ),
                           margin: EdgeInsets.only(left: 0, bottom: 0),
@@ -96,23 +95,8 @@ class _WalletAddState extends State<WalletAdd> {
                                 borderSide: BorderSide(color: Colors.grey),
                                 borderRadius:  BorderRadius.all(Radius.circular(10)),
                               ),
-                            ), items: menuItems, onChanged: (Object? value) {  },
+                            ), items: typeItems, onChanged: (Object? value) {  },
                           )
-                        /*TextField(
-                          decoration: InputDecoration(
-                            hintText: "merchant",
-                            fillColor: secondaryColor,
-                            filled: true,
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius:  BorderRadius.all(Radius.circular(10)),
-                            ),
-                          ),
-                        ),*/
                       )
                     ],),
                 ),
@@ -148,7 +132,7 @@ class _WalletAddState extends State<WalletAdd> {
                       defaultPadding / (Responsive.isMobile(context) ? 2 : 0.7),
                     ),
                   ),
-                  onPressed: () {QR.to("/wallet");},
+                  onPressed: () {},
                   child: Text("Quitter"),
                 ),
               ),
@@ -160,7 +144,7 @@ class _WalletAddState extends State<WalletAdd> {
   }
 }
 
-List<DropdownMenuItem<String>> menuItems = [
-  DropdownMenuItem(child: Text("Kilian Vitou"),value: "1"),
-  DropdownMenuItem(child: Text("Junior Medehou"),value: "2"),
+List<DropdownMenuItem<String>> typeItems = [
+  DropdownMenuItem(child: Text("Debit"),value: "debit"),
+  DropdownMenuItem(child: Text("Credit"),value: "credit"),
 ];

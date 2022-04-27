@@ -1,6 +1,12 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_seo/dashboard_screen.dart';
 import 'package:flutter_web_seo/main_layout.dart';
+import 'package:flutter_web_seo/pages/login.view.dart';
+import 'package:flutter_web_seo/pages/demand.view.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
+import 'package:flutter_web_seo/pages/not_found.view.dart';
+import 'package:flutter_web_seo/pages/operation.view.dart';
+import 'package:flutter_web_seo/pages/operation_one_xbet.view.dart';
 import 'package:flutter_web_seo/pages/transaction.view.dart';
 import 'package:flutter_web_seo/pages/transaction_add.view.dart';
 import 'package:flutter_web_seo/pages/transaction_edit.view.dart';
@@ -10,9 +16,11 @@ import 'package:flutter_web_seo/pages/user_edit.view.dart';
 import 'package:flutter_web_seo/pages/wallet.view.dart';
 import 'package:flutter_web_seo/pages/wallet_add.view.dart';
 import 'package:flutter_web_seo/pages/wallet_edit.view.dart';
+import 'package:flutter_web_seo/routes/auth.middleware.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 class AppRoutes {
+
   static List<QRoute> routes = [
 /*    QRoute.withChild(
         path: '/app',
@@ -31,10 +39,22 @@ class AppRoutes {
         ]
     ),*/
     QRoute(
+      name: 'Login',
+      pageType: QFadePage(),
+      path: '/login',
+      middleware: [
+        LoginMiddleware()
+      ],
+      builder: () => LoginView(),
+    ),
+    QRoute(
       name: DashboardScreen.routeName,
       pageType: QFadePage(),
       path: '/',
       builder: () => MainLayout(widget: DashboardScreen(), pageName: DashboardScreen.routeName,),
+      middleware: [
+        AuthMiddleware(),
+      ]
     ),
     QRoute(
       name: TransactionView.routeName,
@@ -89,6 +109,24 @@ class AppRoutes {
           builder: () => MainLayout(widget: UserEdit(), pageName: UserEdit.routeName,),
         ),
       ]
+    ),
+    QRoute(
+        name: OperationView.routeName,
+        pageType: QFadePage(),
+        path: '/operation',
+        builder: () => MainLayout(widget: OperationView(), pageName: OperationView.routeName,),
+    ),
+    QRoute(
+        name: OperationBetView.routeName,
+        pageType: QFadePage(),
+        path: '/operation-1xbet',
+        builder: () => MainLayout(widget: OperationBetView(), pageName: OperationBetView.routeName,),
+    ),
+    QRoute(
+        name: DemandView.routeName,
+        pageType: QFadePage(),
+        path: '/demand',
+        builder: () => MainLayout(widget: DemandView(), pageName: DemandView.routeName,),
     ),
   ];
 }
