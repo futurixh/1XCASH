@@ -15,17 +15,17 @@ class HomeController extends GetxController {
   final apiService = locator<ApiService>();
 
   @override
-  void onInit() async {
+  void onInit() {
     super.onInit();
-    await apiService.getMyWallet().then((value) {
-      wallet(value);
-      log(value!.toJson().toString());
-    });
   }
 
   @override
   void onReady() async {
     super.onReady();
+    await apiService.getMyWallet().then((value) {
+      wallet(value);
+      log(value!.toJson().toString());
+    });
     await apiService.getTransactions().then((value) {
       transactions(value);
       log(value.toString());

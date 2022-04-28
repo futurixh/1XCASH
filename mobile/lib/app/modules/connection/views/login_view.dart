@@ -34,7 +34,9 @@ class _LoginViewState extends State<LoginView> {
                   backgroundColor: HexColor(MyColors.green),
                 ),
                 onPressed: () async {
-                  Get.to(() => ConnectionFormView());
+                  Get.to(
+                    () => ConnectionFormView(),
+                  );
                 },
                 child: Text(
                   "Se connecter",
@@ -57,7 +59,9 @@ class _LoginViewState extends State<LoginView> {
                   backgroundColor: HexColor(MyColors.green),
                 ),
                 onPressed: () {
-                  Get.to(() => const LoginRegistrationFormView());
+                  Get.to(
+                    () => const LoginRegistrationFormView(),
+                  );
                 },
                 child: Text(
                   "S'inscrire",

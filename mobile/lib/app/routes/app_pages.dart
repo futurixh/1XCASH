@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:x1xcash/app/modules/connection/views/otp_view.dart';
 import 'package:x1xcash/app/modules/splash/splash_view.dart';
 
 import '../modules/connection/bindings/connection_binding.dart';
@@ -21,6 +22,10 @@ class AppPages {
     GetPage(
       name: _Paths.SPLASH,
       page: () => SplashView(),
+    ),
+    GetPage(
+      name: _Paths.OTP,
+      page: () => OtpView(),
     ),
     GetPage(
       name: _Paths.HOME,
