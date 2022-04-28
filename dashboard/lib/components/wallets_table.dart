@@ -1,54 +1,41 @@
 import 'dart:convert';
 
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_web_seo/constants.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
 import 'package:flutter_web_seo/services/api/wallet/wallet.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../locator.dart';
+import '../utils/locator.dart';
 import '../models/user.model.dart';
 import '../models/wallet.model.dart';
-import '../responsive.dart';
+import '../utils/responsive.dart';
 import '../services/api/api.service.dart';
 import 'loader_widget.dart';
 
 final apiService = locator<ApiService>();
 
 class WalletsTable extends StatefulWidget {
-  const WalletsTable({Key? key}) : super(key: key);
+  final User? currentUser;
+  const WalletsTable({Key? key, this.currentUser}) : super(key: key);
 
   @override
   State<WalletsTable> createState() => _WalletsTableState();
 }
 
 class _WalletsTableState extends State<WalletsTable> {
-
-  static const storage = FlutterSecureStorage();
-
   bool _isActive = false;
+  bool _isDelete = false;
   List wallets = <Wallet>[];
-  User? currentUser;
-
-  Future getCurrentUser() async {
-    await storage.read(key: 'user').
-    then((value) {
-      if (mounted) {
-        setState(() {
-          currentUser = User.fromJson(json.decode(value!));
-        });
-      }
-    });
-  }
 
   Future getWallets() async {
     setState(() {
       _isActive = true;
     });
-    await apiService.getWallets().
-    then((value) {
+    await apiService.getWallets().then((value) {
       if (mounted) {
         setState(() {
           wallets = value;
@@ -58,10 +45,59 @@ class _WalletsTableState extends State<WalletsTable> {
     });
   }
 
+  DataRow walletsDataRow(Wallet wallet) {
+    return DataRow(
+      cells: [
+        DataCell(Text(wallet.solde!.toString())),
+        DataCell(
+          Row(
+            children: [
+              Text("${wallet.user!.lastname}"),
+              SizedBox(width: 0.50.wp),
+              Text("${wallet.user!.firstname}")
+            ],
+          ),
+        ),
+        DataCell(Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  QR.to("/wallet/edit/${wallet.sId!}");
+                },
+                icon: const Icon(Icons.edit),
+                iconSize: 2.00.hp),
+            IconButton(
+                onPressed: () async {
+                  try {
+                    await apiService.deleteWallet(wallet.sId!).then(
+                          (value) {
+                        if (kDebugMode) {
+                          print(value!);
+                        }
+                        setState(() {
+                          wallets.remove(wallet);
+                          _isDelete = false;
+                        });
+                      },
+                    );
+                  } catch (e) {
+                    if (kDebugMode) {
+                      print(e.toString());
+                    }
+                  }
+                },
+                icon:  _isDelete ? const Loader() : const Icon(Icons.delete),
+                iconSize: 2.00.hp),
+          ],
+        )),
+      ],
+    );
+  }
+
+  @override
   void initState() {
     super.initState();
     getWallets();
-    getCurrentUser();
   }
 
   @override
@@ -79,11 +115,12 @@ class _WalletsTableState extends State<WalletsTable> {
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
                   horizontal: 1.50.wp * 1.5,
-                  vertical:
-                  2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
+                  vertical: 2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {QR.to("/wallet/add");},
+              onPressed: () {
+                QR.to("/wallet/add");
+              },
               icon: const Icon(Icons.add),
               label: const Text("Ajouter"),
             ),
@@ -112,13 +149,11 @@ class _WalletsTableState extends State<WalletsTable> {
                     DataColumn2(
                       label: Text("User"),
                     ),
-                    DataColumn2(
-                        label: Text("Action")
-                    ),
+                    DataColumn2(label: Text("Action")),
                   ],
                   rows: List.generate(
                     wallets.length,
-                        (index) => walletsDataRow(wallets[index]),
+                    (index) => walletsDataRow(wallets[index]),
                   ),
                 ),
               ),
@@ -128,20 +163,4 @@ class _WalletsTableState extends State<WalletsTable> {
       ],
     );
   }
-}
-
-DataRow walletsDataRow(Wallet wallet) {
-  return DataRow(
-    cells: [
-      DataCell(Text(wallet.solde!.toString())),
-      DataCell(Text("${wallet.user!.firstname}"),),
-      DataCell(
-          Row(
-            children: [
-              IconButton(onPressed: () {QR.to("/wallet/edit/${wallet.sId!}");}, icon: const Icon(Icons.edit), iconSize: 2.00.hp),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.delete), iconSize: 2.00.hp),
-            ],
-          )),
-    ],
-  );
 }

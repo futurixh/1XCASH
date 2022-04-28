@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/responsive.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
+import 'package:flutter_web_seo/utils/responsive.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 class WalletAdd extends StatefulWidget {

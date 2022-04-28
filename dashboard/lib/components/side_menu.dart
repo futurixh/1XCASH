@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_web_seo/dashboard_screen.dart';
+import 'package:flutter_web_seo/pages/dashboard.view.dart';
 import 'package:flutter_web_seo/pages/demand.view.dart';
 import 'package:flutter_web_seo/pages/operation.view.dart';
 import 'package:flutter_web_seo/pages/operation_one_xbet.view.dart';
@@ -17,10 +17,10 @@ import 'package:flutter_web_seo/pages/user_edit.view.dart';
 import 'package:flutter_web_seo/pages/wallet.view.dart';
 import 'package:flutter_web_seo/pages/wallet_add.view.dart';
 import 'package:flutter_web_seo/pages/wallet_edit.view.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import 'models/user.model.dart';
+import '../models/user.model.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({

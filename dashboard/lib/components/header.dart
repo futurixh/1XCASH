@@ -4,16 +4,16 @@ import 'dart:developer';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:flutter_web_seo/responsive.dart';
+import 'package:flutter_web_seo/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 import 'package:flutter_web_seo/services/api/api.service.dart';
 import 'package:flutter_web_seo/services/api/auth/auth.dart';
 
-import '../locator.dart';
-import '../../../constants.dart';
+import '../utils/locator.dart';
+import '../utils/constants.dart';
 import '../models/user.model.dart';
 
 final apiService = locator<ApiService>();
@@ -116,7 +116,7 @@ class ProfileCard extends StatelessWidget {
               const Icon(Icons.keyboard_arrow_down),
             ],
           ),
-          offset: const Offset(-18, -15),
+          offset: const Offset(0, -15),
           onChanged: (value) {},
           icon: const Visibility(visible: false, child: Icon(Icons.arrow_downward)),
           items: typeItems,
@@ -170,7 +170,6 @@ List<DropdownMenuItem<String>> typeItems = [
       ),
       value: "debit",
       onTap: () async {
-        const storage = FlutterSecureStorage();
         try {
           await apiService.logout().then(
                 (value) => log(value!,),

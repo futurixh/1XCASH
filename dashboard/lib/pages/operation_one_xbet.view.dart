@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 
-import '../responsive.dart';
+import '../utils/responsive.dart';
 
 class OperationBetView extends StatefulWidget {
   static String routeName = "Operation 1xBet";

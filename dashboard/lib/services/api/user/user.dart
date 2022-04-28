@@ -79,4 +79,36 @@ extension Users on ApiService {
     return null;
   }
 
+  Future<User?> verifyUser(String id) async {
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.put(
+        Endpoints.verifyUser + id,
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      final user = User.fromJson(response.data["user"]);
+
+      return user;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (kDebugMode) {
+          print(e.response!.data);
+          print(e.response!.headers);
+          print(e.response!.requestOptions);
+        }
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        print(e.requestOptions);
+        print(e.message);
+      }
+    }
+    return null;
+  }
+
 }
