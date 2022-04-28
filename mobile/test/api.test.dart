@@ -5,7 +5,7 @@ void main(List<String> args) async {
   const String password = 'Zanarkand';
 
   final api = ApiService(
-    email: email,
+    phone: email,
     password: password,
   );
 
