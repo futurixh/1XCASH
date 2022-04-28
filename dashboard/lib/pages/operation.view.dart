@@ -1,9 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 
-import '../responsive.dart';
+import '../utils/responsive.dart';
 
 class OperationView extends StatefulWidget {
   static String routeName = "Operation";

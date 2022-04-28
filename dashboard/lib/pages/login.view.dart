@@ -4,14 +4,14 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
-import 'package:flutter_web_seo/constants.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
 import 'package:flutter_web_seo/services/api/api.service.dart';
 import 'package:flutter_web_seo/services/api/auth/auth.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../locator.dart';
-import '../responsive.dart';
+import '../utils/locator.dart';
+import '../utils/responsive.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);

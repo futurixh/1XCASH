@@ -1,16 +1,17 @@
 import 'dart:convert';
 
 import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
-import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/responsive.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
+import 'package:flutter_web_seo/utils/responsive.dart';
 import 'package:flutter_web_seo/services/api/transaction/transaction.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../locator.dart';
+import '../utils/locator.dart';
 import '../models/transaction.model.dart';
 import '../models/user.model.dart';
 import '../services/api/api.service.dart';
@@ -18,37 +19,23 @@ import '../services/api/api.service.dart';
 final apiService = locator<ApiService>();
 
 class TransactionsTable extends StatefulWidget {
-  const TransactionsTable({Key? key}) : super(key: key);
+  final User? currentUser;
+  const TransactionsTable({Key? key, this.currentUser}) : super(key: key);
 
   @override
   State<TransactionsTable> createState() => _TransactionsTableState();
 }
 
 class _TransactionsTableState extends State<TransactionsTable> {
-
-  static const storage = FlutterSecureStorage();
-
   bool _isActive = false;
+  bool _isDelete = false;
   List transactions = <Transaction>[];
-  User? currentUser;
-
-  Future getCurrentUser() async {
-    await storage.read(key: 'user').
-    then((value) {
-      if (mounted) {
-        setState(() {
-          currentUser = User.fromJson(json.decode(value!));
-        });
-      }
-    });
-  }
 
   Future getTransactions() async {
     setState(() {
       _isActive = true;
     });
-    await apiService.getTransactions().
-    then((value) {
+    await apiService.getTransactions().then((value) {
       if (mounted) {
         setState(() {
           transactions = value;
@@ -58,11 +45,58 @@ class _TransactionsTableState extends State<TransactionsTable> {
     });
   }
 
+  DataRow transactionsDataRow(Transaction transaction) {
+    return DataRow(
+      cells: [
+        DataCell(Text(transaction.amount!.toString())),
+        DataCell(Text(transaction.type!)),
+        DataCell(Text(transaction.status!)),
+        DataCell(
+          Text(transaction.wallet!),
+        ),
+        DataCell(Row(
+          children: [
+            IconButton(
+                onPressed: () {
+                  QR.to("/transaction/edit/${transaction.sId!}");
+                },
+                icon: const Icon(Icons.edit),
+                iconSize: 2.00.hp),
+            IconButton(
+                onPressed: () async {
+                  setState(() {
+                    _isDelete = true;
+                  });
+                  try {
+                    await apiService.deleteTransaction(transaction.sId!).then(
+                          (value) {
+                        if (kDebugMode) {
+                          print(value!);
+                        }
+                        setState(() {
+                          transactions.remove(transaction);
+                          _isDelete = false;
+                        });
+                      },
+                    );
+                  } catch (e) {
+                    if (kDebugMode) {
+                      print(e.toString());
+                    }
+                  }
+                },
+                icon:  _isDelete ? const Loader() : const Icon(Icons.delete),
+                iconSize: 2.00.hp),
+          ],
+        )),
+      ],
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     getTransactions();
-    getCurrentUser();
   }
 
   @override
@@ -80,11 +114,12 @@ class _TransactionsTableState extends State<TransactionsTable> {
               style: TextButton.styleFrom(
                 padding: EdgeInsets.symmetric(
                   horizontal: 1.50.wp * 1.5,
-                  vertical:
-                  2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
+                  vertical: 2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
                 ),
               ),
-              onPressed: () {QR.to("/transaction/add");},
+              onPressed: () {
+                QR.to("/transaction/add");
+              },
               icon: const Icon(Icons.add),
               label: const Text("Ajouter"),
             ),
@@ -116,16 +151,12 @@ class _TransactionsTableState extends State<TransactionsTable> {
                     DataColumn2(
                       label: Text("Status"),
                     ),
-                    DataColumn2(
-                        label: Text("Wallet Id")
-                    ),
-                    DataColumn2(
-                        label: Text("Action")
-                    ),
+                    DataColumn2(label: Text("Wallet Id")),
+                    DataColumn2(label: Text("Action")),
                   ],
                   rows: List.generate(
                     transactions.length,
-                        (index) => transactionsDataRow(transactions[index]),
+                    (index) => transactionsDataRow(transactions[index]),
                   ),
                 ),
               ),
@@ -135,22 +166,4 @@ class _TransactionsTableState extends State<TransactionsTable> {
       ],
     );
   }
-}
-
-DataRow transactionsDataRow(Transaction transaction) {
-  return DataRow(
-    cells: [
-      DataCell(Text(transaction.amount!.toString())),
-      DataCell(Text(transaction.type!)),
-      DataCell(Text(transaction.status!)),
-      DataCell(Text(transaction.wallet!),),
-      DataCell(
-          Row(
-            children: [
-              IconButton(onPressed: () {QR.to("/transaction/edit/${transaction.sId!}");}, icon: const Icon(Icons.edit), iconSize: 2.00.hp),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.delete), iconSize: 2.00.hp),
-            ],
-          )),
-    ],
-  );
 }

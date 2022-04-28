@@ -45,4 +45,36 @@ extension Transactions on ApiService {
     return transactions;
   }
 
+  Future<String?> deleteTransaction(String id) async {
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.delete(
+        Endpoints.deleteTransaction + id,
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      return response.data["message"];
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (kDebugMode) {
+          print(e.response!.data);
+          print(e.response!.headers);
+          print(e.response!.requestOptions);
+        }
+      } else {
+        if (kDebugMode) {
+          print(e.requestOptions);
+          print(e.message);
+        }
+      }
+    }
+    return null;
+  }
+
 }

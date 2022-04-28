@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/components/header.dart';
-import 'package:flutter_web_seo/constants.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
-import 'package:flutter_web_seo/responsive.dart';
-import 'package:flutter_web_seo/side_menu.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/responsive.dart';
+import 'package:flutter_web_seo/components/side_menu.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 class MainLayout extends StatefulWidget {

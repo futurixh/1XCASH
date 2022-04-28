@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../../../constants.dart';
+import '../utils/constants.dart';
+
+const defaultPadding = 16.00;
 
 class RecentFiles extends StatelessWidget {
   const RecentFiles({

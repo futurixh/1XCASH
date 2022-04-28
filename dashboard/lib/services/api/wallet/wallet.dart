@@ -28,6 +28,7 @@ extension Wallets on ApiService {
       for (var i = 0; i < rawWallets.length; i++) {
         wallets.add(Wallet.fromJson(rawWallets[i]));
       }
+      print(token);
       return wallets;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -38,11 +39,79 @@ extension Wallets on ApiService {
         }
       } else {
         // Something happened in setting up or sending the request that triggered an Error
-        print(e.requestOptions);
-        print(e.message);
+        if (kDebugMode) {
+          print(e.requestOptions);
+          print(e.message);
+        }
       }
     }
     return wallets;
+  }
+
+  Future<Wallet?> getMyWallet() async {
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.get(
+        Endpoints.getMyWallet,
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      final wallet = Wallet.fromJson(response.data["wallet"]);
+
+      return wallet;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (kDebugMode) {
+          print(e.response!.data);
+          print(e.response!.headers);
+          print(e.response!.requestOptions);
+        }
+      } else {
+        if (kDebugMode) {
+          print(e.requestOptions);
+          print(e.message);
+        }
+      }
+    }
+    return null;
+  }
+
+  Future<String?> deleteWallet(String id) async {
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.delete(
+        Endpoints.deleteWallet + id,
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+
+      return response.data["message"];
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (kDebugMode) {
+          print(e.response!.data);
+          print(e.response!.headers);
+          print(e.response!.requestOptions);
+        }
+      } else {
+        if (kDebugMode) {
+          print(e.requestOptions);
+          print(e.message);
+        }
+      }
+    }
+    return null;
   }
 
 }

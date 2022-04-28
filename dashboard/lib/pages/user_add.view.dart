@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../constants.dart';
-import '../responsive.dart';
+import '../utils/constants.dart';
+import '../utils/responsive.dart';
 
 class UserAdd extends StatefulWidget {
   static String routeName = "User Add";

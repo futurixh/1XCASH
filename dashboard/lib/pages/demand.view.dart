@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_web_seo/constants.dart';
-import 'package:flutter_web_seo/sizeconf.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../responsive.dart';
+import '../utils/responsive.dart';
 
 class DemandView extends StatefulWidget {
   static String routeName = "Demand";
@@ -79,6 +79,7 @@ class _DemandViewState extends State<DemandView> {
                 padding: EdgeInsets.all(1.0.hp),
                 child: ElevatedButton(
                   style: TextButton.styleFrom(
+
                     padding: EdgeInsets.symmetric(
                       horizontal: 2.00.wp * 1.5,
                       vertical:
