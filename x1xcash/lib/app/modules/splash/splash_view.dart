@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -25,16 +26,19 @@ class _SplashViewState extends State<SplashView> {
 
         try {
           final token = await storage.read(key: 'token');
-
-          if (token == null) {
-            Get.to(
-              () => const LoginView(),
-            );
-          } else {
-            Get.to(
-              () => HomeView(),
-            );
-          }
+          log(token.toString());
+          Get.to(
+            () => const LoginView(),
+          );
+          // if (token == null) {
+          //   Get.to(
+          //     () => const LoginView(),
+          //   );
+          // } else {
+          //   Get.to(
+          //     () => HomeView(),
+          //   );
+          // }
         } catch (e) {
           Get.to(
             () => const LoginView(),

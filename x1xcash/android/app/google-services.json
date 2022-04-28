@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "301747399765",
+    "project_id": "xcash-84418",
+    "storage_bucket": "xcash-84418.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:301747399765:android:dbc38e6f32170fef9cb8dc",
+        "android_client_info": {
+          "package_name": "com.futurix.xcash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "301747399765-q4q6qp1p1valk3g7rjth4vaf54ocbpr5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.futurix.xcash",
+            "certificate_hash": "0945a01f4f9eec9bf13247d5993a8d7d63a11922"
+          }
+        },
+        {
+          "client_id": "301747399765-jtroddqbkoseii6muvtu9pqba0ghcvqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ--Ohpk6n7VVjVWYFfhyp_Q0_PI39k_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "301747399765-jtroddqbkoseii6muvtu9pqba0ghcvqe.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -23,6 +23,7 @@ extension Wallets on ApiService {
         ),
       );
 
+      log(response.data);
       return Wallet.fromJson(response.data['wallet']);
     } catch (e) {
       log(e.toString());

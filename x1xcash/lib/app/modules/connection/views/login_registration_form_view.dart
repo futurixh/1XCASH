@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:gap/gap.dart';
@@ -8,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:x1xcash/app/core/services/api/api.service.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
+import 'package:x1xcash/app/modules/connection/views/otp_view.dart';
+import 'package:x1xcash/app/modules/home/views/home_view.dart';
 import 'package:x1xcash/app/modules/registration/views/registration_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/transaction_view.dart';
 import 'package:x1xcash/app/modules/widgets/loader_widget.dart';
@@ -44,6 +47,8 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
 
   final _formKey = GlobalKey<FormState>();
   bool _isActive = false;
+
+  final FirebaseAuth auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -255,33 +260,80 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                 ),
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
-                                    apiService.phone = _mailController.text;
+                                    apiService.phone = _phoneController.text;
                                     apiService.password = _pwdController.text;
                                     setState(() {
                                       _isActive = true;
                                     });
+
+                                    await auth.verifyPhoneNumber(
+                                      phoneNumber:
+                                          '+229' + _phoneController.text,
+                                      verificationCompleted:
+                                          (PhoneAuthCredential
+                                              credential) async {},
+                                      verificationFailed:
+                                          (FirebaseAuthException e) {},
+                                      codeSent:
+                                          (String id, int? resendToken) async {
+                                        String? code =
+                                            await Navigator.of(context)
+                                                .push<String>(
+                                          MaterialPageRoute<String>(
+                                            builder: (BuildContext context) =>
+                                                const OtpView(),
+                                          ),
+                                        );
+                                        log(code!);
+                                        try {
+                                          PhoneAuthCredential credential =
+                                              PhoneAuthProvider.credential(
+                                                  verificationId: id,
+                                                  smsCode: code);
+
+                                          await auth
+                                              .signInWithCredential(credential)
+                                              .then(
+                                            (value) async {
+                                              log("End with signInWithCredential");
+                                              try {
+                                                await apiService.register(
+                                                  lastname: _mailController.text
+                                                      .split('@')[0],
+                                                  firstname: _mailController
+                                                      .text
+                                                      .split('@')[0],
+                                                  email: _mailController.text,
+                                                  password:
+                                                      apiService.password!,
+                                                  telephone:
+                                                      _phoneController.text,
+                                                );
+                                                await apiService.login();
+                                                Get.to(() => HomeView());
+                                              } catch (e) {
+                                                log(e.toString());
+                                              }
+                                            },
+                                          );
+                                        } on FirebaseAuthException catch (e) {
+                                          log(e.toString());
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Colors.red,
+                                              content: Text(
+                                                "Veillez vérifier le code que vous avez reçu ou recommencez.",
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                      codeAutoRetrievalTimeout:
+                                          (String verificationId) {},
+                                    );
                                     try {
-                                      await apiService
-                                          .register(
-                                            lastname: _mailController.text
-                                                .split('@')[0],
-                                            firstname: _mailController.text
-                                                .split('@')[0],
-                                            email: apiService.phone!,
-                                            password: apiService.password!,
-                                            telephone: _phoneController.text,
-                                          )
-                                          .then(
-                                            (value) => log(
-                                              value!.toJson().toString(),
-                                            ),
-                                          );
-                                      await apiService.login().then(
-                                            (value) => log(
-                                              value!.toJson().toString(),
-                                            ),
-                                          );
-                                      // Get.to(() => TransactionView());
+                                      Get.to(() => HomeView());
                                     } catch (e) {
                                       log(e.toString());
                                     }
