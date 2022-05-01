@@ -13,6 +13,9 @@ class User extends BaseModel {
   String? createdAt;
   String? updatedAt;
   String? token;
+  String? ifu;
+  String? rccm;
+  String? identity;
 
   User({
     role,
@@ -25,6 +28,9 @@ class User extends BaseModel {
     createdAt,
     updatedAt,
     token,
+    ifu,
+    rccm,
+    identity,
   });
 
   User.fromJson(Map<String, dynamic> json) {
@@ -38,6 +44,9 @@ class User extends BaseModel {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     token = json['token'];
+    ifu = json['ifu'];
+    rccm = json['rccm'];
+    identity = json['identity'];
   }
 
   @override
@@ -53,6 +62,9 @@ class User extends BaseModel {
     data['createdAt'] = createdAt;
     data['updatedAt'] = updatedAt;
     data['token'] = token;
+    data['ifu'] = ifu;
+    data['rccm'] = rccm;
+    data['identity'] = identity;
     return data;
   }
 }

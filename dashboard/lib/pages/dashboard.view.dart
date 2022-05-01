@@ -6,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_seo/components/header.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/components/my_fields.dart';
+import 'package:flutter_web_seo/components/my_transactions_table.dart';
 import 'package:flutter_web_seo/components/my_wallet.dart';
 import 'package:flutter_web_seo/components/recent_files.dart';
 import 'package:flutter_web_seo/services/api/wallet/wallet.dart';
@@ -58,7 +59,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
       children: [
         currentUser != null ? Visibility(visible: (currentUser?.role != "admin"), child: MyWalletCard(currentUser: currentUser)) : SizedBox(height: 6.00.hp, width: 3.00.wp, child: const Loader(),),
         SizedBox(height: 2.00.hp),
-        const RecentFiles(),
+        currentUser != null ? Visibility(visible: (currentUser?.role != "admin"), child: MyTransactions(currentUser: currentUser)) : SizedBox(height: 6.00.hp, width: 3.00.wp, child: const Loader(),),
+        //const RecentFiles(),
       ],
     );
   }

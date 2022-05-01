@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_web_seo/utils/constants.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
 import 'package:flutter_web_seo/routes/routes.dart';
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
       routerDelegate: QRouterDelegate(AppRoutes.routes),
       debugShowCheckedModeBanner: false,
       title: 'flutter_web_seo',
+      builder: EasyLoading.init(),
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: bgColor,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)

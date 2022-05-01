@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_web_seo/models/user.model.dart';
 import 'package:flutter_web_seo/services/api/api.service.dart';
 import 'package:flutter_web_seo/services/api/auth/auth.dart';
@@ -33,10 +34,14 @@ extension Users on ApiService {
       return users;
     } on DioError catch (e) {
       if (e.response != null) {
+        if (e.response!.data["message"] != null) {
+          EasyLoading.showError(e.response!.data["message"], duration: const Duration(seconds: 3));
+        }
+        if (e.response!.data["errors"] != null) {
+          EasyLoading.showError(e.response!.data["errors"].toString(), duration: const Duration(seconds: 3));
+        }
         if (kDebugMode) {
           print(e.response!.data);
-          print(e.response!.headers);
-          print(e.response!.requestOptions);
         }
       } else {
         // Something happened in setting up or sending the request that triggered an Error
@@ -65,10 +70,14 @@ extension Users on ApiService {
       return response.data["message"];
     } on DioError catch (e) {
       if (e.response != null) {
+        if (e.response!.data["message"] != null) {
+          EasyLoading.showError(e.response!.data["message"], duration: const Duration(seconds: 3));
+        }
+        if (e.response!.data["errors"] != null) {
+          EasyLoading.showError(e.response!.data["errors"].toString(), duration: const Duration(seconds: 3));
+        }
         if (kDebugMode) {
           print(e.response!.data);
-          print(e.response!.headers);
-          print(e.response!.requestOptions);
         }
       } else {
         // Something happened in setting up or sending the request that triggered an Error
@@ -97,10 +106,14 @@ extension Users on ApiService {
       return user;
     } on DioError catch (e) {
       if (e.response != null) {
+        if (e.response!.data["message"] != null) {
+          EasyLoading.showError(e.response!.data["message"], duration: const Duration(seconds: 3));
+        }
+        if (e.response!.data["errors"] != null) {
+          EasyLoading.showError(e.response!.data["errors"].toString(), duration: const Duration(seconds: 3));
+        }
         if (kDebugMode) {
           print(e.response!.data);
-          print(e.response!.headers);
-          print(e.response!.requestOptions);
         }
       } else {
         // Something happened in setting up or sending the request that triggered an Error
