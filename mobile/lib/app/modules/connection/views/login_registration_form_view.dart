@@ -53,7 +53,6 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: HexColor(MyColors.backgroundColor),
       body: SafeArea(
         child: Container(
@@ -68,38 +67,38 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
               ),
             ),
           ),
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: Get.mediaQuery.size.height,
-              width: Get.mediaQuery.size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 40.00.hp,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.00.wp,
-                      vertical: 10,
-                    ),
-                    child: Text(
-                      "S'inscrire",
-                      style: TextStyle(
-                          fontSize: 30.00.sp, fontWeight: FontWeight.bold),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.bottomLeft,
+                width: 40.00.hp,
+                height: MediaQuery.of(context).size.height * (0.4),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.00.wp,
+                  vertical: 10,
+                ),
+                child: Text(
+                  "S'inscrire",
+                  style: TextStyle(
+                      fontSize: 30.00.sp, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: 100.00.wp,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
                   ),
-                  Container(
-                    width: 100.00.wp,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
+                  child: SingleChildScrollView(
                     child: Form(
                       key: _formKey,
-                      child: SingleChildScrollView(
+                      child: Padding(
                         padding: EdgeInsets.all(8.00.wp),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -266,6 +265,8 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                       _isActive = true;
                                     });
 
+                                    log(_phoneController.text.toString());
+
                                     await auth.verifyPhoneNumber(
                                       phoneNumber:
                                           '+229' + _phoneController.text,
@@ -309,8 +310,8 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                                   telephone:
                                                       _phoneController.text,
                                                 );
-                                                await apiService.login();
-                                                Get.to(() => HomeView());
+                                                // await apiService.login();
+                                                // Get.to(() => HomeView());
                                               } catch (e) {
                                                 log(e.toString());
                                               }
@@ -332,11 +333,11 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                       codeAutoRetrievalTimeout:
                                           (String verificationId) {},
                                     );
-                                    try {
-                                      Get.to(() => HomeView());
-                                    } catch (e) {
-                                      log(e.toString());
-                                    }
+                                    // try {
+                                    //   Get.to(() => HomeView());
+                                    // } catch (e) {
+                                    //   log(e.toString());
+                                    // }
                                     setState(() {
                                       _isActive = false;
                                     });
@@ -359,9 +360,9 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

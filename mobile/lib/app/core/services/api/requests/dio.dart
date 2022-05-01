@@ -5,7 +5,7 @@ extension DioExt on ApiService {
   Dio get dio {
     final dioObj = Dio(
       BaseOptions(
-        baseUrl: 'https://9079-197-234-223-217.ngrok.io/',
+        baseUrl: 'https://one-xcash-api.herokuapp.com/',
       ),
     );
 

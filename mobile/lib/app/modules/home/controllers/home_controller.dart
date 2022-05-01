@@ -10,6 +10,7 @@ class HomeController extends GetxController {
   //TODO: Implement HomeController
 
   final count = 0.obs;
+  final isIsOnLogout = false.obs;
   final wallet = Wallet().obs;
   final transactions = <Transaction>[].obs;
   final apiService = locator<ApiService>();
@@ -22,17 +23,20 @@ class HomeController extends GetxController {
   @override
   void onReady() async {
     super.onReady();
-    await apiService.getMyWallet().then((value) {
-      wallet(value);
-      log(value!.toJson().toString());
-    });
-    await apiService.getTransactions().then((value) {
-      transactions(value);
-      log(value.toString());
-    });
+    // await apiService.getMyWallet().then((value) {
+    //   wallet(value);
+    //   log(value!.toJson().toString());
+    // });
+    // await apiService.getTransactions().then((value) {
+    //   transactions(value);
+    //   log(value.toString());
+    // });
   }
 
   @override
   void onClose() {}
+
   void increment() => count.value++;
+
+  void setIsOnLogout() => isIsOnLogout.value = !isIsOnLogout.value;
 }
