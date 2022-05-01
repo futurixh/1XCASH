@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/utils/constants.dart';
@@ -77,6 +78,7 @@ class _UsersTableState extends State<UsersTable> {
                     try {
                       await apiService.verifyUser(user.sId!).then(
                             (value) {
+                              EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
                           if (kDebugMode) {
                             print(value!);
                           }
@@ -113,6 +115,7 @@ class _UsersTableState extends State<UsersTable> {
                   try {
                     await apiService.deleteUser(user.sId!).then(
                       (value) {
+                        EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
                         if (kDebugMode) {
                           print(value!);
                         }

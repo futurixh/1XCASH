@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/services/api/wallet/wallet.dart';
 import 'package:flutter_web_seo/utils/constants.dart';
@@ -179,6 +180,7 @@ class _OperationViewState extends State<OperationView> {
                         try {
                           await apiService.makeOperation(id, _amountController.text, _transactionType!).then(
                                 (value) {
+                                  EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
                               if (kDebugMode) {
                                 print(value!.toJson().toString(),);
                               }

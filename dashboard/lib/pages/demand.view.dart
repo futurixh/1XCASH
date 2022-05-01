@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/services/api/transaction/transaction.dart';
 import 'package:flutter_web_seo/utils/constants.dart';
@@ -185,17 +186,16 @@ class _DemandViewState extends State<DemandView> {
                         try {
                           await apiService.makeDemand(_amountController.text).then(
                                 (value) {
+                                  EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
                               if (kDebugMode) {
                                 print(value!.toJson().toString(),);
                               }
-                              _showToastSuccess("Demande validée");
                             },
                           );
                         } catch (e) {
                           if (kDebugMode) {
                             print(e.toString());
                           }
-                          _showToastError(e.toString());
                         }
                         setState(() {
                           _isActive = false;
