@@ -72,7 +72,6 @@ class _WalletsTableState extends State<WalletsTable> {
                   try {
                     await apiService.deleteWallet(wallet.sId!).then(
                           (value) {
-                            EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                         if (kDebugMode) {
                           print(value!);
                         }

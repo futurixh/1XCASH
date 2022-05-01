@@ -180,7 +180,6 @@ class _OperationViewState extends State<OperationView> {
                         try {
                           await apiService.makeOperation(id, _amountController.text, _transactionType!).then(
                                 (value) {
-                                  EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                               if (kDebugMode) {
                                 print(value!.toJson().toString(),);
                               }

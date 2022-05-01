@@ -107,7 +107,6 @@ class _TransactionsTableState extends State<TransactionsTable> {
                     try {
                       await apiService.validateTransaction(transaction.sId!).then(
                             (value) {
-                              EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                           if (kDebugMode) {
                             print(value!);
                           }
@@ -118,6 +117,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
                         },
                       );
                     } catch (e) {
+                      EasyLoading.showError(e.toString(), duration: const Duration(seconds: 3));
                       setState(() {
                         _isFinished = false;
                       });
@@ -156,7 +156,6 @@ class _TransactionsTableState extends State<TransactionsTable> {
                   try {
                     await apiService.deleteTransaction(transaction.sId!).then(
                           (value) {
-                            EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                         if (kDebugMode) {
                           print(value!);
                         }

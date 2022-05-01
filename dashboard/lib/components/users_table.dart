@@ -78,7 +78,6 @@ class _UsersTableState extends State<UsersTable> {
                     try {
                       await apiService.verifyUser(user.sId!).then(
                             (value) {
-                              EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                           if (kDebugMode) {
                             print(value!);
                           }
@@ -115,7 +114,6 @@ class _UsersTableState extends State<UsersTable> {
                   try {
                     await apiService.deleteUser(user.sId!).then(
                       (value) {
-                        EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                         if (kDebugMode) {
                           print(value!);
                         }
