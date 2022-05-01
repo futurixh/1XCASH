@@ -186,7 +186,7 @@ class _DemandViewState extends State<DemandView> {
                         try {
                           await apiService.makeDemand(_amountController.text).then(
                                 (value) {
-                                  EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
+                                  EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                               if (kDebugMode) {
                                 print(value!.toJson().toString(),);
                               }

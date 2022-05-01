@@ -287,7 +287,7 @@ class _OperationBetViewState extends State<OperationBetView> {
                         try {
                           await apiService.makeBetOperation(_idController.text, _telephoneController.text, _amountController.text, _transactionType!).then(
                                 (value) {
-                                  EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
+                                  EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                               if (kDebugMode) {
                                 print(value!.toJson().toString(),);
                               }

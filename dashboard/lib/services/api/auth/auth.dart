@@ -33,6 +33,7 @@ extension Auth on ApiService {
       String js = jsonEncode(response.data["user"]);
       await storage.write(key: 'user', value: js);
       await storage.write(key: 'token', value: user.token);
+      print("ok");
 
       return user;
 
@@ -46,6 +47,7 @@ extension Auth on ApiService {
         }
         if (kDebugMode) {
           print(e.response!.data);
+          print("error");
         }
       } else {
         // Something happened in setting up or sending the request that triggered an Error

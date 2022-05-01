@@ -107,7 +107,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
                     try {
                       await apiService.validateTransaction(transaction.sId!).then(
                             (value) {
-                              EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
+                              EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                           if (kDebugMode) {
                             print(value!);
                           }
@@ -156,7 +156,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
                   try {
                     await apiService.deleteTransaction(transaction.sId!).then(
                           (value) {
-                            EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
+                            EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                         if (kDebugMode) {
                           print(value!);
                         }

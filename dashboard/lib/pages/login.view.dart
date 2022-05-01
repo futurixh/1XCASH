@@ -210,7 +210,7 @@ class _LoginViewState extends State<LoginView> {
                             try {
                               await apiService.login().then(
                                     (value) {
-                                      EasyLoading.showError("Succès", duration: const Duration(seconds: 3));
+                                      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
                                       if (kDebugMode) {
                                         print(
                                         value!.toJson().toString(),
