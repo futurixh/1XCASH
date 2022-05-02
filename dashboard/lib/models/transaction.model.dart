@@ -1,4 +1,5 @@
 import 'package:flutter_web_seo/models/base.model.dart';
+import 'package:flutter_web_seo/models/wallet.model.dart';
 
 class Transaction extends BaseModel {
   String? status;
@@ -6,7 +7,7 @@ class Transaction extends BaseModel {
   int? amount;
   String? type;
   Bet? bet;
-  String? wallet;
+  Wallet? wallet;
   String? createdAt;
   String? updatedAt;
 
@@ -27,7 +28,7 @@ class Transaction extends BaseModel {
     amount = json['amount'];
     type = json['type'];
     bet = json['bet'] != null ? Bet.fromJson(json['bet']) : null;
-    wallet = json['wallet'];
+    wallet = json['wallet'] != null ? Wallet.fromJson(json['wallet']) : null;
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
   }

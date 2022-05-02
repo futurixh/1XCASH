@@ -78,8 +78,8 @@ class _SideMenuState extends State<SideMenu> {
             press: () => QR.toName(UserView.routeName),
           ),
           DrawerListTile(
-            visible: currentUser?.role == "admin" ? true : false,
-            active: QR.isCurrentName(TransactionView.routeName) ||  QR.isCurrentName(TransactionEdit.routeName)||  QR.isCurrentName(TransactionAdd.routeName) ? true : false,
+            visible: currentUser?.role == "admin" || currentUser?.role == "super-merchant" ? true : false,
+            active: QR.isCurrentName(TransactionView.routeName) ||  QR.isCurrentName(TransactionEdit.routeName)||  QR.isCurrentName(TransactionAdd.routeName) || QR.isCurrentName(OperationView.routeName) ? true : false,
             title: TransactionView.routeName,
             svgSrc: "assets/icons/menu_tran.svg",
             press: () => QR.toName(TransactionView.routeName),
@@ -98,15 +98,15 @@ class _SideMenuState extends State<SideMenu> {
             svgSrc: "assets/icons/money.svg",
             press: () => QR.toName(DemandView.routeName),
           ),
-          DrawerListTile(
+/*          DrawerListTile(
             visible: (currentUser?.role == "super-merchant" || currentUser?.role == "admin")  ? true : false,
             active: QR.isCurrentName(OperationView.routeName)  ? true : false,
             title: OperationView.routeName,
             svgSrc: "assets/icons/process.svg",
             press: () => QR.toName(OperationView.routeName),
-          ),
+          ),*/
           DrawerListTile(
-            visible: (currentUser?.role == "super-merchant" || currentUser?.role == "admin") ? true : false,
+            visible: (currentUser?.role == "super-merchant" || currentUser?.role == "merchant") ? true : false,
             active: QR.isCurrentName(OperationBetView.routeName)  ? true : false,
             title: OperationBetView.routeName,
             svgSrc: "assets/icons/chips-bet.svg",

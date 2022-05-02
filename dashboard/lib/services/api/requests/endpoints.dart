@@ -9,13 +9,16 @@ class Endpoints {
   static String getWallets = "api/wallet/";
   static String deleteWallet = "api/wallet/";
   static String getMyWallet = "api/wallet/by-user";
+  static String makeOperation = "api/wallet/make-operation/";
+  static String makeBetOperation = "api/wallet/make-1xbet-operation";
 
   static String getTransactions = "api/transaction";
   static String deleteTransaction = "api/transaction/";
   static String getMyTransactions = "api/transaction/my";
+  static String makeDemand = 'api/transaction/make-demand';
+  static String validateTransaction = 'api/transaction/validate/';
 
 
-  static String makeValidation = 'api/transaction/make-demand';
   static String makeValidationById = 'api/transaction/make-demand/';
   static String make1xbetTransaction = 'api/wallet/make-1xbet-operation';
   static String transaction = 'api/transaction/my';

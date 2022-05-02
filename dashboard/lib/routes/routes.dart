@@ -138,18 +138,16 @@ class AppRoutes {
               pageName: TransactionEdit.routeName,
             ),
           ),
-        ]),
-    QRoute(
-      name: OperationView.routeName,
-      pageType: QFadePage(),
-      path: '/operation',
-      builder: () => MainLayout(
-        widget: OperationView(),
-        pageName: OperationView.routeName,
-      ),
-      middleware: [
-        AuthMiddleware(),
-      ],
+          QRoute(
+            name: OperationView.routeName,
+            pageType: QFadePage(),
+            path: '/operation/:id/:amount/:type',
+            builder: () => MainLayout(
+              widget: OperationView(),
+              pageName: OperationView.routeName,
+            ),
+          ),
+        ]
     ),
     QRoute(
       name: OperationBetView.routeName,
