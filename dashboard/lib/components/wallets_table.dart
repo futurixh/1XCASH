@@ -112,19 +112,6 @@ class _WalletsTableState extends State<WalletsTable> {
               "Wallets",
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            ElevatedButton.icon(
-              style: TextButton.styleFrom(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 1.50.wp * 1.5,
-                  vertical: 2.00.hp / (Responsive.isMobile(context) ? 2 : 1),
-                ),
-              ),
-              onPressed: () {
-                QR.to("/wallet/add");
-              },
-              icon: const Icon(Icons.add),
-              label: const Text("Ajouter"),
-            ),
           ],
         ),
         SizedBox(height: 2.00.hp),

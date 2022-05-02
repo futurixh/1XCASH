@@ -3,8 +3,11 @@ class Endpoints {
   static String logout = 'api/user/logout';
 
   static String getUsers = "api/user/";
+  static String getUser = "api/user/";
   static String deleteUser = "api/user/";
   static String verifyUser = "api/user/verify/";
+  static String createUser = "api/user/create";
+  static String editUser = "api/user/";
 
   static String getWallets = "api/wallet/";
   static String deleteWallet = "api/wallet/";

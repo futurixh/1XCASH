@@ -30,7 +30,7 @@ extension Wallets on ApiService {
       for (var i = 0; i < rawWallets.length; i++) {
         wallets.add(Wallet.fromJson(rawWallets[i]));
       }
-      print(token);
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return wallets;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -71,7 +71,7 @@ extension Wallets on ApiService {
       );
 
       final wallet = Wallet.fromJson(response.data["wallet"]);
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return wallet;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -107,7 +107,7 @@ extension Wallets on ApiService {
           },
         ),
       );
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return response.data["message"];
     } on DioError catch (e) {
       if (e.response != null) {
@@ -148,7 +148,7 @@ extension Wallets on ApiService {
       );
 
       final wallet = Wallet.fromJson(response.data["wallet"]);
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return wallet;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -186,7 +186,7 @@ extension Wallets on ApiService {
         ),
       );
       final transaction = Transaction.fromJson(response.data["transaction"]);
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return transaction;
     } on DioError catch (e) {
       if (e.response != null) {

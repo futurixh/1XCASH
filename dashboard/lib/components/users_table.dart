@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -12,6 +13,7 @@ import 'package:flutter_web_seo/models/user.model.dart';
 import 'package:flutter_web_seo/services/api/user/user.dart';
 import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/locator.dart';
 import '../utils/responsive.dart';
@@ -51,23 +53,30 @@ class _UsersTableState extends State<UsersTable> {
     return DataRow2(
       cells: [
         DataCell(
-          Row(
-            children: [
-              Text(user.lastname!),
-              SizedBox(width: 0.50.wp),
-              Text(user.firstname!)
-            ],
-          ),
+          Text("${user.lastname!} ${user.firstname!}"),
         ),
         DataCell(Text(user.email!)),
         DataCell(Text(user.telephone!)),
         DataCell(Text(user.role!)),
+        DataCell((user.ifu != null && user.identity != null && user.rccm != null) ? Flex(direction: Axis.horizontal, children: [
+          RichText(text: TextSpan(text: "identity", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 2.50.sp), recognizer: new TapGestureRecognizer()
+            ..onTap = () { launchUrl(Uri.parse(user.identity!));
+            },)),
+          SizedBox(width: 0.50.wp,),
+          RichText(text: TextSpan(text: "ifu", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 2.50.sp), recognizer: new TapGestureRecognizer()
+            ..onTap = () { launchUrl(Uri.parse(user.ifu!));
+            },)),
+          SizedBox(width: 0.50.wp,),
+          RichText(text: TextSpan(text: "rccm", style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 2.50.sp), recognizer: new TapGestureRecognizer()
+            ..onTap = () { launchUrl(Uri.parse(user.rccm!));
+            },)),
+        ],)
+         : Text("no files")),
         DataCell(
-            SizedBox(
-              height: 3.00.hp,
-              width: 4.00.wp,
-              child: _isVerified ? const Loader() : ElevatedButton(
+          ElevatedButton(
                 style: TextButton.styleFrom(
+                  maximumSize: Size(5.00.wp, 7.00.hp),
+                  minimumSize: Size(3.00.wp, 3.50.hp),
                   backgroundColor: user.verified! == true ? Colors.green : Colors.red
                 ),
                 onPressed: () async {
@@ -94,18 +103,18 @@ class _UsersTableState extends State<UsersTable> {
                     }
                   }
                 },
-                child: Text(user.verified!.toString()),
+                child: Text(user.verified!.toString(), style: TextStyle(fontSize: 2.50.sp),),
               ),
-            )
         ),
-        DataCell(Row(
+        DataCell(Flex(
+          direction: Axis.horizontal,
           children: [
             IconButton(
                 onPressed: () {
                   QR.to("/user/edit/${user.sId!}");
                 },
                 icon: const Icon(Icons.edit),
-                iconSize: 2.00.hp),
+                iconSize: 0.50.wp * 0.25.hp),
             IconButton(
                 onPressed: () async {
                   setState(() {
@@ -130,7 +139,7 @@ class _UsersTableState extends State<UsersTable> {
                   }
                 },
                 icon: _isDelete ? const Loader() : const Icon(Icons.delete),
-                iconSize: 2.00.hp),
+                iconSize: 0.50.wp * 0.25.hp),
           ],
         )),
       ],
@@ -188,13 +197,15 @@ class _UsersTableState extends State<UsersTable> {
                     DataColumn2(label: Text("Nom"), size: ColumnSize.L),
                     DataColumn2(
                       label: Text("Email"),
+                      size: ColumnSize.L
                     ),
                     DataColumn2(
                       label: Text("Telephone"),
                     ),
                     DataColumn2(label: Text("Role")),
+                    DataColumn2(label: Text("Files"), size: ColumnSize.L),
                     DataColumn2(label: Text("Verified")),
-                    DataColumn2(label: Text("Action")),
+                    DataColumn2(label: Text("Action") , size: ColumnSize.L),
                   ],
                   rows: List.generate(
                     users.length,

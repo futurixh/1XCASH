@@ -33,7 +33,6 @@ extension Auth on ApiService {
       String js = jsonEncode(response.data["user"]);
       await storage.write(key: 'user', value: js);
       await storage.write(key: 'token', value: user.token);
-      print("ok");
 
       return user;
 

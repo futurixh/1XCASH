@@ -29,6 +29,7 @@ extension Transactions on ApiService {
       for (var i = 0; i < rawTransactions.length; i++) {
         transactions.add(Transaction.fromJson(rawTransactions[i]));
       }
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return transactions;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -63,7 +64,7 @@ extension Transactions on ApiService {
           },
         ),
       );
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return response.data["message"];
     } on DioError catch (e) {
       if (e.response != null) {
@@ -105,6 +106,7 @@ extension Transactions on ApiService {
       for (var i = 0; i < rawTransactions.length; i++) {
         transactions.add(Transaction.fromJson(rawTransactions[i]));
       }
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return transactions;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -143,7 +145,7 @@ extension Transactions on ApiService {
       );
 
       final transaction = Transaction.fromJson(response.data["transaction"]);
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return transaction;
     } on DioError catch (e) {
       if (e.response != null) {
@@ -181,7 +183,7 @@ extension Transactions on ApiService {
       );
 
       final transaction = Transaction.fromJson(response.data["transaction"]);
-
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
       return transaction;
     } on DioError catch (e) {
       if (e.response != null) {
