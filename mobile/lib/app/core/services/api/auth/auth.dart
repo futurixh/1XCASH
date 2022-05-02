@@ -53,10 +53,11 @@ extension Auth on ApiService {
 
       final user = User.fromJson(response.data["user"]);
       await storage.write(key: 'token', value: user.token);
+      await storage.write(key: 'id', value: user.sId);
 
       return user;
     } catch (e) {
-      log(e.toString());
+      log("Error on login" + e.toString());
     }
     return null;
   }

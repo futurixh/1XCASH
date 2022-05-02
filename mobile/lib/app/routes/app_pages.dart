@@ -1,22 +1,24 @@
 import 'package:get/get.dart';
-import 'package:x1xcash/app/modules/connection/views/otp_view.dart';
-import 'package:x1xcash/app/modules/splash/splash_view.dart';
 
 import '../modules/connection/bindings/connection_binding.dart';
 import '../modules/connection/views/connection_view.dart';
+import '../modules/connection/views/otp_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/registration_view.dart';
+import '../modules/splash/splash_view.dart';
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
+import '../modules/verification/bindings/verification_binding.dart';
+import '../modules/verification/views/verification_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(
@@ -46,6 +48,11 @@ class AppPages {
       name: _Paths.TRANSACTION,
       page: () => TransactionView(),
       binding: TransactionBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFICATION,
+      page: () => VerificationView(),
+      binding: VerificationBinding(),
     ),
   ];
 }

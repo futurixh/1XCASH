@@ -10,6 +10,7 @@ abstract class Routes {
   static const USER_REGISTRATION = _Paths.USER_REGISTRATION;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const TRANSACTION = _Paths.TRANSACTION;
+  static const VERIFICATION = _Paths.VERIFICATION;
 }
 
 abstract class _Paths {
@@ -23,4 +24,5 @@ abstract class _Paths {
   static const CONNECTION = '/connection';
   static const REGISTRATION = '/registration';
   static const TRANSACTION = '/transaction';
+  static const VERIFICATION = '/verification';
 }
