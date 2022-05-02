@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
+import 'package:x1xcash/app/modules/registration/views/registration_form_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/deposit_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/withdrawal_view.dart';
 import 'package:x1xcash/app/modules/widgets/transaction_tile.dart';
@@ -23,21 +23,28 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.login,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        elevation: 0,
+        leadingWidth: MediaQuery.of(context).size.width * (0.5),
+        leading: TextButton(
+          onPressed: () {
+            Get.to(() => RegistrationFormView());
+          },
+          child: const Text(
+            'Verifier le compte',
+            style: TextStyle(
+              color: Colors.black,
+            ),
           ),
         ),
         actions: [
           IconButton(
             onPressed: () async {
-              const storage = FlutterSecureStorage();
-              await storage.deleteAll().then((value) => Navigator.of(context)
-                  .pushNamedAndRemoveUntil('/', (route) => false));
+              await homeController.logout(context);
             },
             icon: const Icon(
               Icons.logout,
+              color: Colors.black,
             ),
           ),
         ],
@@ -46,9 +53,10 @@ class HomeView extends GetView<HomeController> {
         child: homeController.isIsOnLogout.value
             ? Center(
                 child: CircularProgressIndicator(
-                    color: HexColor(
-                  MyColors.green,
-                )),
+                  color: HexColor(
+                    MyColors.green,
+                  ),
+                ),
               )
             : SizedBox(
                 height: Get.mediaQuery.size.height,

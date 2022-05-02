@@ -7,4 +7,5 @@ class Endpoints {
   static String make1xbetTransaction = 'api/wallet/make-1xbet-operation';
   static String getMyWallet = 'api/wallet/by-user';
   static String transaction = 'api/transaction/my';
+  static String uploadFiles = 'api/user/upload-files';
 }

@@ -222,6 +222,9 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                   if (value!.isEmpty) {
                                     return "Ce champs ne peut etre vide";
                                   }
+                                  if (value.length < 6) {
+                                    return "Au moins 6 chiffres";
+                                  }
                                   return null;
                                 },
                                 decoration: InputDecoration(
@@ -298,7 +301,8 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                             (value) async {
                                               log("End with signInWithCredential");
                                               try {
-                                                await apiService.register(
+                                                await apiService
+                                                    .register(
                                                   lastname: _mailController.text
                                                       .split('@')[0],
                                                   firstname: _mailController
@@ -309,11 +313,18 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                                       apiService.password!,
                                                   telephone:
                                                       _phoneController.text,
+                                                )
+                                                    .then(
+                                                  (value) async {
+                                                    await apiService.login();
+                                                    Get.to(() => HomeView());
+                                                  },
                                                 );
                                                 // await apiService.login();
                                                 // Get.to(() => HomeView());
                                               } catch (e) {
-                                                log(e.toString());
+                                                log("Error on registration view" +
+                                                    e.toString());
                                               }
                                             },
                                           );

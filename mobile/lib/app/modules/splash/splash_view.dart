@@ -30,15 +30,15 @@ class _SplashViewState extends State<SplashView> {
           Get.to(
             () => const LoginView(),
           );
-          // if (token == null) {
-          //   Get.to(
-          //     () => const LoginView(),
-          //   );
-          // } else {
-          //   Get.to(
-          //     () => HomeView(),
-          //   );
-          // }
+          if (token == null) {
+            Get.to(
+              () => const LoginView(),
+            );
+          } else {
+            Get.to(
+              () => HomeView(),
+            );
+          }
         } catch (e) {
           Get.to(
             () => const LoginView(),
