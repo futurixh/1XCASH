@@ -73,7 +73,7 @@ class _UsersTableState extends State<UsersTable> {
         ],)
          : Text("no files")),
         DataCell(
-          ElevatedButton(
+          _isVerified ? const Loader() : ElevatedButton(
                 style: TextButton.styleFrom(
                   maximumSize: Size(5.00.wp, 7.00.hp),
                   minimumSize: Size(3.00.wp, 3.50.hp),

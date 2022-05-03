@@ -134,6 +134,9 @@ class _TransactionsTableState extends State<TransactionsTable> {
         DataCell(
           Text("${transaction.wallet!.user!.firstname!} ${transaction.wallet!.user!.lastname!}"),
         ),
+        DataCell(
+          (transaction.bet != null && transaction.bet?.type != null)  ? Text(transaction.bet!.type!) : Text("No bet"),
+        ),
         DataCell(Row(
           children: [
             IconButton(
@@ -143,13 +146,13 @@ class _TransactionsTableState extends State<TransactionsTable> {
                 icon: const Icon(Icons.money),
                 iconSize: 2.00.hp),
             IconButton(
-                onPressed: () {
+                onPressed: (widget.currentUser!.role == "admin") ? () {
                   QR.to("/transaction/edit/${transaction.sId!}");
-                },
+                } : null,
                 icon: const Icon(Icons.edit),
                 iconSize: 2.00.hp),
             IconButton(
-                onPressed: () async {
+                onPressed: (widget.currentUser!.role == "admin") ? () async {
                   setState(() {
                     _isDelete = true;
                   });
@@ -170,7 +173,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
                       print(e.toString());
                     }
                   }
-                },
+                } : null,
                 icon:  _isDelete ? const Loader() : const Icon(Icons.delete),
                 iconSize: 2.00.hp),
           ],
@@ -227,6 +230,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
                       label: Text("Status"),
                     ),
                     DataColumn2(label: Text("Wallet User")),
+                    DataColumn2(label: Text("1xBet Type")),
                     DataColumn2(label: Text("Action")),
                   ],
                   rows: List.generate(

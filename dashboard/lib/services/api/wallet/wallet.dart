@@ -56,6 +56,79 @@ extension Wallets on ApiService {
     return wallets;
   }
 
+  Future<Wallet?> getWallet(String id) async {
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.get(
+        Endpoints.getWallet + id,
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      final wallet = Wallet.fromJson(response.data["wallet"]);
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
+      return wallet;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (e.response!.data["message"] != null) {
+          EasyLoading.showError(e.response!.data["message"], duration: const Duration(seconds: 3));
+        }
+        if (e.response!.data["errors"] != null) {
+          EasyLoading.showError(e.response!.data["errors"].toString(), duration: const Duration(seconds: 3));
+        }
+        if (kDebugMode) {
+          print(e.response!.data);
+        }
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        print(e.requestOptions);
+        print(e.message);
+      }
+    }
+    return null;
+  }
+
+  Future<Wallet?> editWallet(String id, String solde) async {
+    String token = await getBearerToken();
+
+    try {
+      final response = await dio.put(
+        Endpoints.editWallet + id,
+        data: {"solde": solde},
+        options: Options(
+          headers: {
+            'Authorization': token,
+            'Content-Type': 'application/json',
+          },
+        ),
+      );
+      final wallet = Wallet.fromJson(response.data["wallet"]);
+      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
+      return wallet;
+    } on DioError catch (e) {
+      if (e.response != null) {
+        if (e.response!.data["message"] != null) {
+          EasyLoading.showError(e.response!.data["message"], duration: const Duration(seconds: 3));
+        }
+        if (e.response!.data["errors"] != null) {
+          EasyLoading.showError(e.response!.data["errors"].toString(), duration: const Duration(seconds: 3));
+        }
+        if (kDebugMode) {
+          print(e.response!.data);
+        }
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        print(e.requestOptions);
+        print(e.message);
+      }
+    }
+    return null;
+  }
+
   Future<Wallet?> getMyWallet() async {
     String token = await getBearerToken();
 
