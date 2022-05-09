@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/components/header.dart';
-import 'package:flutter_web_seo/constants.dart';
+import 'package:flutter_web_seo/utils/constants.dart';
 import 'package:flutter_web_seo/pages/home.view.dart';
-import 'package:flutter_web_seo/responsive.dart';
-import 'package:flutter_web_seo/side_menu.dart';
+import 'package:flutter_web_seo/utils/responsive.dart';
+import 'package:flutter_web_seo/components/side_menu.dart';
+import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 class MainLayout extends StatefulWidget {
@@ -16,18 +17,20 @@ class MainLayout extends StatefulWidget {
 }
 
 class _MainLayoutState extends State<MainLayout> {
+  final ScrollController _controller = ScrollController();
   @override
 
   Widget build(BuildContext context) {
+    GetSizePerScreen().init(context);
     return Scaffold(
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // We want this side menu only for large screen
             if (Responsive.isDesktop(context))
-              Expanded(
+              const Expanded(
                 // default flex = 1
                 // and it takes 1/6 part of the screen
                 child: SideMenu(),
@@ -37,11 +40,12 @@ class _MainLayoutState extends State<MainLayout> {
               flex: 5,
               child: SafeArea(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(defaultPadding),
+                  controller: _controller,
+                  padding: EdgeInsets.all(3.00.hp),
                   child: Column(
                     children: [
                       Header(pageName: widget.pageName),
-                      SizedBox(height: 100.00),
+                      SizedBox(height: 10.00.hp),
                       widget.widget
                     ],
                   ),

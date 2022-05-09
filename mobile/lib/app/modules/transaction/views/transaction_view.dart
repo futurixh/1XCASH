@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../controllers/transaction_controller.dart';
 
 class TransactionView extends GetView<TransactionController> {
+  const TransactionView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

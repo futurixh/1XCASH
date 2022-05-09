@@ -9,6 +9,8 @@ import 'package:x1xcash/app/modules/registration/views/registration_form_view.da
 import '../controllers/registration_controller.dart';
 
 class RegistrationView extends GetView<RegistrationController> {
+  const RegistrationView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

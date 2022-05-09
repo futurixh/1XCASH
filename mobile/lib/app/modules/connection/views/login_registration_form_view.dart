@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:gap/gap.dart';
@@ -8,6 +9,8 @@ import 'package:get/get.dart';
 import 'package:x1xcash/app/core/services/api/api.service.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
+import 'package:x1xcash/app/modules/connection/views/otp_view.dart';
+import 'package:x1xcash/app/modules/home/views/home_view.dart';
 import 'package:x1xcash/app/modules/registration/views/registration_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/transaction_view.dart';
 import 'package:x1xcash/app/modules/widgets/loader_widget.dart';
@@ -45,10 +48,11 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
   final _formKey = GlobalKey<FormState>();
   bool _isActive = false;
 
+  final FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: HexColor(MyColors.backgroundColor),
       body: SafeArea(
         child: Container(
@@ -63,38 +67,38 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
               ),
             ),
           ),
-          child: SingleChildScrollView(
-            child: SizedBox(
-              height: Get.mediaQuery.size.height,
-              width: Get.mediaQuery.size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: 40.00.hp,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.00.wp,
-                      vertical: 10,
-                    ),
-                    child: Text(
-                      "S'inscrire",
-                      style: TextStyle(
-                          fontSize: 30.00.sp, fontWeight: FontWeight.bold),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.bottomLeft,
+                width: 40.00.hp,
+                height: MediaQuery.of(context).size.height * (0.4),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 8.00.wp,
+                  vertical: 10,
+                ),
+                child: Text(
+                  "S'inscrire",
+                  style: TextStyle(
+                      fontSize: 30.00.sp, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  width: 100.00.wp,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30),
                     ),
                   ),
-                  Container(
-                    width: 100.00.wp,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                    ),
+                  child: SingleChildScrollView(
                     child: Form(
                       key: _formKey,
-                      child: SingleChildScrollView(
+                      child: Padding(
                         padding: EdgeInsets.all(8.00.wp),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,6 +222,9 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                   if (value!.isEmpty) {
                                     return "Ce champs ne peut etre vide";
                                   }
+                                  if (value.length < 6) {
+                                    return "Au moins 6 chiffres";
+                                  }
                                   return null;
                                 },
                                 decoration: InputDecoration(
@@ -255,36 +262,93 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                                 ),
                                 onPressed: () async {
                                   if (_formKey.currentState!.validate()) {
-                                    apiService.phone = _mailController.text;
+                                    apiService.phone = _phoneController.text;
                                     apiService.password = _pwdController.text;
                                     setState(() {
                                       _isActive = true;
                                     });
-                                    try {
-                                      await apiService
-                                          .register(
-                                            lastname: _mailController.text
-                                                .split('@')[0],
-                                            firstname: _mailController.text
-                                                .split('@')[0],
-                                            email: apiService.phone!,
-                                            password: apiService.password!,
-                                            telephone: _phoneController.text,
-                                          )
-                                          .then(
-                                            (value) => log(
-                                              value!.toJson().toString(),
+
+                                    log(_phoneController.text.toString());
+
+                                    await auth.verifyPhoneNumber(
+                                      phoneNumber:
+                                          '+229' + _phoneController.text,
+                                      verificationCompleted:
+                                          (PhoneAuthCredential
+                                              credential) async {},
+                                      verificationFailed:
+                                          (FirebaseAuthException e) {},
+                                      codeSent:
+                                          (String id, int? resendToken) async {
+                                        String? code =
+                                            await Navigator.of(context)
+                                                .push<String>(
+                                          MaterialPageRoute<String>(
+                                            builder: (BuildContext context) =>
+                                                const OtpView(),
+                                          ),
+                                        );
+                                        log(code!);
+                                        try {
+                                          PhoneAuthCredential credential =
+                                              PhoneAuthProvider.credential(
+                                                  verificationId: id,
+                                                  smsCode: code);
+
+                                          await auth
+                                              .signInWithCredential(credential)
+                                              .then(
+                                            (value) async {
+                                              log("End with signInWithCredential");
+                                              try {
+                                                await apiService
+                                                    .register(
+                                                  lastname: _mailController.text
+                                                      .split('@')[0],
+                                                  firstname: _mailController
+                                                      .text
+                                                      .split('@')[0],
+                                                  email: _mailController.text,
+                                                  password:
+                                                      apiService.password!,
+                                                  telephone:
+                                                      _phoneController.text,
+                                                )
+                                                    .then(
+                                                  (value) async {
+                                                    await apiService.login();
+                                                    Get.to(() => HomeView());
+                                                  },
+                                                );
+                                                // await apiService.login();
+                                                // Get.to(() => HomeView());
+                                              } catch (e) {
+                                                log("Error on registration view" +
+                                                    e.toString());
+                                              }
+                                            },
+                                          );
+                                        } on FirebaseAuthException catch (e) {
+                                          log(e.toString());
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              backgroundColor: Colors.red,
+                                              content: Text(
+                                                "Veillez vérifier le code que vous avez reçu ou recommencez.",
+                                              ),
                                             ),
                                           );
-                                      await apiService.login().then(
-                                            (value) => log(
-                                              value!.toJson().toString(),
-                                            ),
-                                          );
-                                      // Get.to(() => TransactionView());
-                                    } catch (e) {
-                                      log(e.toString());
-                                    }
+                                        }
+                                      },
+                                      codeAutoRetrievalTimeout:
+                                          (String verificationId) {},
+                                    );
+                                    // try {
+                                    //   Get.to(() => HomeView());
+                                    // } catch (e) {
+                                    //   log(e.toString());
+                                    // }
                                     setState(() {
                                       _isActive = false;
                                     });
@@ -307,9 +371,9 @@ class _LoginRegistrationFormViewState extends State<LoginRegistrationFormView> {
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ),

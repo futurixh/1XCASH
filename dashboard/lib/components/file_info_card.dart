@@ -2,7 +2,9 @@ import 'package:flutter_web_seo/models/MyFiles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../constants.dart';
+import '../utils/constants.dart';
+
+const defaultPadding = 16.00;
 
 class FileInfoCard extends StatelessWidget {
   const FileInfoCard({

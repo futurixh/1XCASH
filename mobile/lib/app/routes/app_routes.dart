@@ -3,17 +3,20 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+  static const OTP = _Paths.OTP;
   static const SPLASH = _Paths.SPLASH;
   static const HOME = _Paths.HOME;
   static const CONNECTION = _Paths.CONNECTION;
   static const USER_REGISTRATION = _Paths.USER_REGISTRATION;
   static const REGISTRATION = _Paths.REGISTRATION;
   static const TRANSACTION = _Paths.TRANSACTION;
+  static const VERIFICATION = _Paths.VERIFICATION;
 }
 
 abstract class _Paths {
   _Paths._();
   static const SPLASH = '/';
+  static const OTP = '/otp';
   static const LOGIN = '/login';
   static const USER_REGISTRATION = '/user_registration';
 
@@ -21,4 +24,5 @@ abstract class _Paths {
   static const CONNECTION = '/connection';
   static const REGISTRATION = '/registration';
   static const TRANSACTION = '/transaction';
+  static const VERIFICATION = '/verification';
 }

@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-import '../../../constants.dart';
+import '../utils/constants.dart';
+
+const defaultPadding = 16.00;
 
 class RecentFiles extends StatelessWidget {
   const RecentFiles({
@@ -14,7 +16,6 @@ class RecentFiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ScrollController _controller = ScrollController();
 
     return Container(
       padding: EdgeInsets.all(defaultPadding),
@@ -32,7 +33,6 @@ class RecentFiles extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: DataTable2(
-              scrollController: _controller,
               columnSpacing: defaultPadding,
               minWidth: 600,
               columns: [
