@@ -10,6 +10,10 @@ class NotFoundView extends StatefulWidget {
 class _NotFoundViewState extends State<NotFoundView> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Center(
+        child: Text("Page not found"),
+      ),
+    );
   }
 }

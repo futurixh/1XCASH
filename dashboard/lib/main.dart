@@ -45,6 +45,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppRoutes().setup();
     return MaterialApp.router(
       routeInformationParser: const QRouteInformationParser(),
       routerDelegate: QRouterDelegate(AppRoutes.routes),

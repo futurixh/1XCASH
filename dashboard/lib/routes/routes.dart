@@ -5,6 +5,7 @@ import 'package:flutter_web_seo/pages/dashboard.view.dart';
 import 'package:flutter_web_seo/components/main_layout.dart';
 import 'package:flutter_web_seo/pages/login.view.dart';
 import 'package:flutter_web_seo/pages/demand.view.dart';
+import 'package:flutter_web_seo/pages/not_found.view.dart';
 import 'package:flutter_web_seo/pages/operation.view.dart';
 import 'package:flutter_web_seo/pages/operation_one_xbet.view.dart';
 import 'package:flutter_web_seo/pages/transaction.view.dart';
@@ -21,6 +22,17 @@ import 'package:qlevar_router/qlevar_router.dart';
 
 
 class AppRoutes {
+
+  void setup() {
+    QR.settings.notFoundPage = QRoute(
+      path: '/404',
+      builder: () => const NotFoundView(),
+    );
+
+    QR.settings.pagesType = const QFadePage();
+
+  }
+
   static List<QRoute> routes = [
     QRoute(
         name: DashboardScreen.routeName,
