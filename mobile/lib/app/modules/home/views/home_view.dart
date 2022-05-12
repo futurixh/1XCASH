@@ -8,7 +8,9 @@ import 'package:get/get.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
 import 'package:x1xcash/app/modules/registration/views/registration_form_view.dart';
+import 'package:x1xcash/app/modules/transaction/views/deposit_code_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/deposit_view.dart';
+import 'package:x1xcash/app/modules/transaction/views/withdrawal_code_view.dart';
 import 'package:x1xcash/app/modules/transaction/views/withdrawal_view.dart';
 import 'package:x1xcash/app/modules/widgets/transaction_tile.dart';
 
@@ -113,7 +115,7 @@ class HomeView extends GetView<HomeController> {
                                 onPressed: () {
                                   log("Clicked");
                                   Get.to(
-                                    () => DepositView(),
+                                    () => const DepositCodeView(),
                                   );
                                 },
                                 child: Text(
@@ -139,7 +141,7 @@ class HomeView extends GetView<HomeController> {
                                     backgroundColor: HexColor(MyColors.green)),
                                 onPressed: () {
                                   Get.to(
-                                    () => const WithdrawalView(),
+                                    () => const WithdrawalCodeView(),
                                   );
                                 },
                                 child: Text(
