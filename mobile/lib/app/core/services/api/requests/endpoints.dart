@@ -8,4 +8,6 @@ class Endpoints {
   static String getMyWallet = 'api/wallet/by-user';
   static String transaction = 'api/transaction/my';
   static String uploadFiles = 'api/user/upload-files';
+  static String generateCodeDeposit = 'api/code/deposit';
+  static String generateCodeWithdrawal = 'api/code/withdrawal';
 }

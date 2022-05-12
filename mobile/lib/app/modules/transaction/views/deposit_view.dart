@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:x1xcash/app/core/services/api/api.service.dart';
 import 'package:x1xcash/app/core/utils/extensions.dart';
 import 'package:x1xcash/app/core/values/colors.dart';
+import 'package:x1xcash/app/modules/transaction/views/deposit_code_display_view.dart';
 import 'package:x1xcash/app/modules/widgets/loader_widget.dart';
 import 'package:x1xcash/locator.dart';
 
@@ -49,46 +50,55 @@ class _DepositViewState extends State<DepositView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Id client 1xbet",
-                  style: TextStyle(
-                    color: Colors.black.withOpacity(0.7),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12.00.sp,
+                Visibility(
+                  visible: false,
+                  child: Text(
+                    "Id client 1xbet",
+                    style: TextStyle(
+                      color: Colors.black.withOpacity(0.7),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12.00.sp,
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: 1.00.hp,
+                Visibility(
+                  visible: false,
+                  child: SizedBox(
+                    height: 1.00.hp,
+                  ),
                 ),
-                SizedBox(
-                  width: 81.00.wp,
-                  child: TextFormField(
-                    controller: _idController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Ce champs ne peut etre vide";
-                      }
-                      return null;
-                    },
-                    keyboardType: TextInputType.text,
-                    decoration: InputDecoration(
-                      hintText: "Ex: 12345364789",
-                      hintStyle: TextStyle(
-                          color: Colors.grey,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 11.00.sp),
-                      filled: true,
-                      fillColor: HexColor(MyColors.backgroundColor),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18),
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(18),
-                        borderSide: const BorderSide(color: Colors.white),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        borderSide: const BorderSide(color: Colors.white),
+                Visibility(
+                  visible: false,
+                  child: SizedBox(
+                    width: 81.00.wp,
+                    child: TextFormField(
+                      controller: _idController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Ce champs ne peut etre vide";
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        hintText: "Ex: 12345364789",
+                        hintStyle: TextStyle(
+                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 11.00.sp),
+                        filled: true,
+                        fillColor: HexColor(MyColors.backgroundColor),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(18),
+                          borderSide: const BorderSide(color: Colors.white),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
@@ -99,9 +109,10 @@ class _DepositViewState extends State<DepositView> {
                 Text(
                   "Montant",
                   style: TextStyle(
-                      color: Colors.black.withOpacity(0.7),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 12.00.sp),
+                    color: Colors.black.withOpacity(0.7),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.00.sp,
+                  ),
                 ),
                 SizedBox(
                   height: 1.00.hp,
@@ -164,27 +175,57 @@ class _DepositViewState extends State<DepositView> {
                         setState(() {
                           _isActive = true;
                         });
+                        // try {
+                        //   await apiService
+                        //       .makeDeposit(
+                        //           _idController.text, _amountController.text)
+                        //       .then(
+                        //     (value) {
+                        //       ScaffoldMessenger.of(context).showSnackBar(
+                        //         const SnackBar(
+                        //           backgroundColor: Colors.green,
+                        //           content: Text("Operation reussie"),
+                        //         ),
+                        //       );
+                        //       Navigator.of(context).pushNamedAndRemoveUntil(
+                        //           '/home', (route) => false);
+                        //     },
+                        //   );
+                        // } catch (e) {
+                        //   ScaffoldMessenger.of(context).showSnackBar(
+                        //     const SnackBar(
+                        //       backgroundColor: Colors.red,
+                        //       content: Text("Une erreur est survenue"),
+                        //     ),
+                        //   );
+                        // }
                         try {
                           await apiService
-                              .makeDeposit(
-                                  _idController.text, _amountController.text)
+                              .generateDepositCode(
+                            amount: int.parse(_amountController.text),
+                          )
                               .then(
                             (value) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  backgroundColor: Colors.green,
-                                  content: Text("Operation reussie"),
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => DepositCodeDisplayView(
+                                    code: value!.code,
+                                    amount: value.amount,
+                                  ),
                                 ),
                               );
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                  '/home', (route) => false);
                             },
                           );
                         } catch (e) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               backgroundColor: Colors.red,
-                              content: Text("Une erreur est survenue"),
+                              content: Text(
+                                "Une erreur est survenue",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           );
                         }

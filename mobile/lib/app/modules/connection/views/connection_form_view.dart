@@ -47,7 +47,6 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: HexColor(MyColors.backgroundColor),
       body: SafeArea(
         child: Container(
@@ -70,183 +69,192 @@ class _ConnectionFormViewState extends State<ConnectionFormView> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    width: 40.00.hp,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 8.00.wp,
-                      vertical: 10,
-                    ),
-                    child: Text(
-                      "Se connecter",
-                      style: TextStyle(
-                          fontSize: 30.00.sp, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  Container(
-                    width: 100.00.wp,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomLeft,
+                      width: 40.00.hp,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 8.00.wp,
+                        vertical: 10,
+                      ),
+                      child: Text(
+                        "Se connecter",
+                        style: TextStyle(
+                            fontSize: 30.00.sp, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    child: Form(
-                      key: _formKey,
+                  ),
+                  Expanded(
+                    child: Container(
+                      width: 100.00.wp,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          topRight: Radius.circular(30),
+                        ),
+                      ),
                       child: SingleChildScrollView(
                         padding: EdgeInsets.all(8.00.wp),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Please enter",
-                              style: TextStyle(fontSize: 20.00.sp),
-                            ),
-                            SizedBox(
-                              height: 2.00.hp,
-                            ),
-                            Text(
-                              "Numéro de téléphone",
-                              style: TextStyle(fontSize: 13.00.sp),
-                            ),
-                            SizedBox(
-                              width: 81.00.wp,
-                              child: TextFormField(
-                                controller: _phoneController,
-                                keyboardType: TextInputType.phone,
-                                style: TextStyle(
-                                  fontSize: 20.00.sp,
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Ce champs ne peut etre vide";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 0,
-                                    vertical: 1.00.wp,
-                                  ),
-                                  hintText: "98123244",
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey.shade300,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  prefixIcon: Padding(
-                                    padding: EdgeInsets.only(
-                                      top: 0.50.hp,
-                                      right: 1.00.wp,
-                                    ),
-                                    child: Text(
-                                      "+229 ",
-                                      style: TextStyle(
-                                        fontSize: 20.00.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 2.00.hp,
-                            ),
-                            Text(
-                              "Mot de passe",
-                              style: TextStyle(fontSize: 13.00.sp),
-                            ),
-                            SizedBox(
-                              width: 81.00.wp,
-                              child: TextFormField(
-                                obscureText: true,
-                                controller: _pwdController,
-                                keyboardType: TextInputType.text,
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Please enter",
                                 style: TextStyle(fontSize: 20.00.sp),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return "Ce champs ne peut etre vide";
-                                  }
-                                  return null;
-                                },
-                                decoration: InputDecoration(
-                                  isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 0,
-                                    vertical: 1.00.wp,
-                                  ),
-                                  hintText: "Ex: 1xcash229",
-                                  hintStyle: TextStyle(
-                                    color: Colors.grey.shade300,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                  filled: true,
-                                  fillColor: Colors.white,
-                                  enabledBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                  focusedBorder: const OutlineInputBorder(
-                                    borderSide: BorderSide(color: Colors.white),
-                                  ),
-                                ),
                               ),
-                            ),
-                            const Gap(50),
-                            SizedBox(
-                              width: 80.00.wp,
-                              height: 6.50.hp,
-                              child: TextButton(
-                                style: TextButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(22),
+                              SizedBox(
+                                height: 2.00.hp,
+                              ),
+                              Text(
+                                "Numéro de téléphone",
+                                style: TextStyle(fontSize: 13.00.sp),
+                              ),
+                              SizedBox(
+                                width: 81.00.wp,
+                                child: TextFormField(
+                                  controller: _phoneController,
+                                  keyboardType: TextInputType.phone,
+                                  style: TextStyle(
+                                    fontSize: 20.00.sp,
                                   ),
-                                  backgroundColor: HexColor(MyColors.green),
-                                ),
-                                onPressed: () async {
-                                  if (_formKey.currentState!.validate()) {
-                                    apiService.phone = _phoneController.text;
-                                    apiService.password = _pwdController.text;
-                                    setState(() {
-                                      _isActive = true;
-                                    });
-                                    try {
-                                      await apiService.login().then(
-                                            (value) => log(
-                                              value!.toJson().toString(),
-                                            ),
-                                          );
-                                      Get.to(() => HomeView());
-                                    } catch (e) {
-                                      log(e.toString());
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Ce champs ne peut etre vide";
                                     }
-                                    setState(() {
-                                      _isActive = false;
-                                    });
-                                  }
-                                  //
-                                },
-                                child: _isActive
-                                    ? const Loader()
-                                    : Text(
-                                        "Je me connecte",
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 1.00.wp,
+                                    ),
+                                    hintText: "98123244",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey.shade300,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    prefixIcon: Padding(
+                                      padding: EdgeInsets.only(
+                                        top: 0.50.hp,
+                                        right: 1.00.wp,
+                                      ),
+                                      child: Text(
+                                        "+229 ",
                                         style: TextStyle(
-                                          fontSize: 15.00.sp,
-                                          color: Colors.white,
+                                          fontSize: 20.00.sp,
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
+                                    ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
                               ),
-                            ),
-                            const Gap(50),
-                          ],
+                              SizedBox(
+                                height: 2.00.hp,
+                              ),
+                              Text(
+                                "Mot de passe",
+                                style: TextStyle(fontSize: 13.00.sp),
+                              ),
+                              SizedBox(
+                                width: 81.00.wp,
+                                child: TextFormField(
+                                  obscureText: true,
+                                  controller: _pwdController,
+                                  keyboardType: TextInputType.text,
+                                  style: TextStyle(fontSize: 20.00.sp),
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "Ce champs ne peut etre vide";
+                                    }
+                                    return null;
+                                  },
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 0,
+                                      vertical: 1.00.wp,
+                                    ),
+                                    hintText: "Ex: 1xcash229",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey.shade300,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const Gap(50),
+                              SizedBox(
+                                width: 80.00.wp,
+                                height: 6.50.hp,
+                                child: TextButton(
+                                  style: TextButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(22),
+                                    ),
+                                    backgroundColor: HexColor(MyColors.green),
+                                  ),
+                                  onPressed: () async {
+                                    if (_formKey.currentState!.validate()) {
+                                      apiService.phone = _phoneController.text;
+                                      apiService.password = _pwdController.text;
+                                      setState(() {
+                                        _isActive = true;
+                                      });
+                                      try {
+                                        await apiService.login().then(
+                                              (value) => log(
+                                                value!.toJson().toString(),
+                                              ),
+                                            );
+                                        Get.to(() => HomeView());
+                                      } catch (e) {
+                                        log(e.toString());
+                                      }
+                                      setState(() {
+                                        _isActive = false;
+                                      });
+                                    }
+                                    //
+                                  },
+                                  child: _isActive
+                                      ? const Loader()
+                                      : Text(
+                                          "Je me connecte",
+                                          style: TextStyle(
+                                            fontSize: 15.00.sp,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                ),
+                              ),
+                              const Gap(50),
+                            ],
+                          ),
                         ),
                       ),
                     ),
