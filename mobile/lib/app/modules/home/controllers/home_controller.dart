@@ -39,6 +39,18 @@ class HomeController extends GetxController {
   @override
   void onClose() {}
 
+  Future<void> refreshData() async {
+    await apiService.getMyWallet().then(
+      (value) {
+        wallet(value);
+      },
+    );
+    await apiService.getTransactions().then((value) {
+      transactions(value);
+      log(value.toString());
+    });
+  }
+
   void increment() => count.value++;
 
   void setIsOnLogout() => isIsOnLogout.value = !isIsOnLogout.value;

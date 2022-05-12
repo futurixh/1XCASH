@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:x1xcash/app/modules/transaction/views/withdrawal_code_display_view.dart';
+import 'package:x1xcash/app/modules/transaction/views/withdrawal_code_view.dart';
 import 'package:x1xcash/locator.dart';
 
 import 'app/routes/app_pages.dart';
@@ -19,6 +21,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       title: "1xCash",
       initialRoute: AppPages.INITIAL,
+      //   home: WithdrawalCodeDisplayView(),
       getPages: AppPages.routes,
     ),
   );
