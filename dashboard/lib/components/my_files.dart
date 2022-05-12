@@ -1,8 +1,8 @@
 
-import 'package:flutter_web_seo/responsive.dart';
+import 'package:flutter_web_seo/utils/responsive.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_seo/models/MyFiles.dart';
-import '../../../constants.dart';
+import '../utils/constants.dart';
 import 'file_info_card.dart';
 
 class MyFiles extends StatelessWidget {

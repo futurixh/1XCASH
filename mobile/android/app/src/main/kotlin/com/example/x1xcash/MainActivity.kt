@@ -1,4 +1,4 @@
-package com.example.x1xcash
+package com.futurix.xcash
 
 import io.flutter.embedding.android.FlutterActivity
 

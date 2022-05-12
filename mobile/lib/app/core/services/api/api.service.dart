@@ -2,6 +2,7 @@ import 'package:x1xcash/app/core/services/base.service.dart';
 export './auth/auth.dart';
 export './wallets/wallets.dart';
 export './transactions/transactions.dart';
+export './users/add_infos.dart';
 
 class ApiService extends BaseService {
   String? password;
