@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_seo/pages/dashboard.view.dart';
 import 'package:flutter_web_seo/components/main_layout.dart';
+import 'package:flutter_web_seo/pages/depositCode.view.dart';
 import 'package:flutter_web_seo/pages/login.view.dart';
 import 'package:flutter_web_seo/pages/demand.view.dart';
 import 'package:flutter_web_seo/pages/not_found.view.dart';
@@ -17,6 +18,7 @@ import 'package:flutter_web_seo/pages/user_edit.view.dart';
 import 'package:flutter_web_seo/pages/wallet.view.dart';
 import 'package:flutter_web_seo/pages/wallet_add.view.dart';
 import 'package:flutter_web_seo/pages/wallet_edit.view.dart';
+import 'package:flutter_web_seo/pages/withdrawalCode.view.dart';
 import 'package:flutter_web_seo/routes/auth.middleware.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -168,6 +170,30 @@ class AppRoutes {
       builder: () => MainLayout(
         widget: OperationBetView(),
         pageName: OperationBetView.routeName,
+      ),
+      middleware: [
+        AuthMiddleware(),
+      ],
+    ),
+    QRoute(
+      name: DepositCodeView.routeName,
+      pageType: QFadePage(),
+      path: '/deposit-code',
+      builder: () => MainLayout(
+        widget: DepositCodeView(),
+        pageName: DepositCodeView.routeName,
+      ),
+      middleware: [
+        AuthMiddleware(),
+      ],
+    ),
+    QRoute(
+      name: WithdrawalCodeView.routeName,
+      pageType: QFadePage(),
+      path: '/withdrawal-code',
+      builder: () => MainLayout(
+        widget: WithdrawalCodeView(),
+        pageName: WithdrawalCodeView.routeName,
       ),
       middleware: [
         AuthMiddleware(),

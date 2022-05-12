@@ -48,7 +48,7 @@ class _LoginViewState extends State<LoginView> {
                   style: TextStyle(
                       fontSize: 8.00.sp,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white)),
+                      color: Colors.black87)),
               Padding(
                 padding: EdgeInsets.all(3.00.hp),
                 child: Container(

@@ -78,7 +78,7 @@ class _WalletEditState extends State<WalletEdit> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                                 "Solde",
-                                style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                             )
                         ),
                         SizedBox(

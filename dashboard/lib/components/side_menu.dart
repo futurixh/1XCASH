@@ -2,10 +2,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_hex_color/flutter_hex_color.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_web_seo/pages/dashboard.view.dart';
 import 'package:flutter_web_seo/pages/demand.view.dart';
+import 'package:flutter_web_seo/pages/depositCode.view.dart';
 import 'package:flutter_web_seo/pages/operation.view.dart';
 import 'package:flutter_web_seo/pages/operation_one_xbet.view.dart';
 import 'package:flutter_web_seo/pages/transaction.view.dart';
@@ -21,6 +23,7 @@ import 'package:flutter_web_seo/utils/sizeconf.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 import '../models/user.model.dart';
+import '../pages/withdrawalCode.view.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({
@@ -56,6 +59,7 @@ class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: HexColor("66C48F"),
       child: ListView(
         children: [
           DrawerHeader(
@@ -92,19 +96,26 @@ class _SideMenuState extends State<SideMenu> {
             press: () => QR.toName(WalletView.routeName),
           ),
           DrawerListTile(
+            visible: currentUser?.role == "admin" ? true : false,
+            active: QR.isCurrentName(DepositCodeView.routeName) ? true : false,
+            title: DepositCodeView.routeName,
+            svgSrc: "assets/icons/money.svg",
+            press: () => QR.toName(DepositCodeView.routeName),
+          ),
+          DrawerListTile(
+            visible: currentUser?.role == "admin" ? true : false,
+            active: QR.isCurrentName(WithdrawalCodeView.routeName) ? true : false,
+            title: WithdrawalCodeView.routeName,
+            svgSrc: "assets/icons/money.svg",
+            press: () => QR.toName(WithdrawalCodeView.routeName),
+          ),
+          DrawerListTile(
             visible: currentUser?.role == "super-merchant" || currentUser?.role == "merchant"  ? true : false,
             active: QR.isCurrentName(DemandView.routeName)  ? true : false,
             title: DemandView.routeName,
             svgSrc: "assets/icons/money.svg",
             press: () => QR.toName(DemandView.routeName),
           ),
-/*          DrawerListTile(
-            visible: (currentUser?.role == "super-merchant" || currentUser?.role == "admin")  ? true : false,
-            active: QR.isCurrentName(OperationView.routeName)  ? true : false,
-            title: OperationView.routeName,
-            svgSrc: "assets/icons/process.svg",
-            press: () => QR.toName(OperationView.routeName),
-          ),*/
           DrawerListTile(
             visible: (currentUser?.role == "super-merchant" || currentUser?.role == "merchant") ? true : false,
             active: QR.isCurrentName(OperationBetView.routeName)  ? true : false,

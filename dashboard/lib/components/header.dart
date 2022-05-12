@@ -104,7 +104,7 @@ class ProfileCard extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 "icons/profile-user.svg",
-                color: Colors.white,
+                color: Colors.black,
                 height: 2.00.hp,
               ),
               if (!Responsive.isMobile(context))

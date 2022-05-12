@@ -25,6 +25,9 @@ class Endpoints {
   static String makeDemand = 'api/transaction/make-demand';
   static String validateTransaction = 'api/transaction/validate/';
 
+  static String getDepositCode = 'api/code/deposit';
+  static String getWithdrawalCode = 'api/code/withdrawal';
+
 
   static String makeValidationById = 'api/transaction/make-demand/';
   static String make1xbetTransaction = 'api/wallet/make-1xbet-operation';

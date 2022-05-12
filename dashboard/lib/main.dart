@@ -52,11 +52,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'flutter_web_seo',
       builder: EasyLoading.init(),
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: bgColor,
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Color(0xFFF2F4F8),
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
-            .apply(bodyColor: Colors.white),
-        canvasColor: secondaryColor,
+            .apply(bodyColor: Colors.black87),
+        canvasColor: Colors.white,
       ),
     );
   }

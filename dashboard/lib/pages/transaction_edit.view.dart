@@ -95,7 +95,7 @@ class _TransactionEditState extends State<TransactionEdit> {
                             alignment: Alignment.centerLeft,
                             child: Text(
                                 "Amount",
-                                style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                             )
                         ),
                         SizedBox(
@@ -150,7 +150,7 @@ class _TransactionEditState extends State<TransactionEdit> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                   "Id 1xbet",
-                                  style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                  style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                               )
                           ),
                           SizedBox(
@@ -206,7 +206,7 @@ class _TransactionEditState extends State<TransactionEdit> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                   "Client telephone",
-                                  style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                  style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                               )
                           ),
                           SizedBox(
@@ -258,7 +258,7 @@ class _TransactionEditState extends State<TransactionEdit> {
                         Container(
                             child: Text(
                                 "Status",
-                                style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                             ),
                             margin: const EdgeInsets.only(left: 0, bottom: 0),
                             alignment: Alignment.centerLeft
@@ -314,7 +314,7 @@ class _TransactionEditState extends State<TransactionEdit> {
                         Container(
                             child: Text(
                                 "Transaction Type",
-                                style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                             ),
                             margin: const EdgeInsets.only(left: 0, bottom: 0),
                             alignment: Alignment.centerLeft
@@ -370,7 +370,7 @@ class _TransactionEditState extends State<TransactionEdit> {
                         Container(
                             child: Text(
                                 "Transaction Type Bet",
-                                style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                                style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                             ),
                             margin: const EdgeInsets.only(left: 0, bottom: 0),
                             alignment: Alignment.centerLeft

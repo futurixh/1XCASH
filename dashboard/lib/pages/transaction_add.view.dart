@@ -39,7 +39,7 @@ class _TransactionAddState extends State<TransactionAdd> {
                       Container(
                           child: Text(
                               "Amount",
-                              style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                              style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                           ),
                           margin: const EdgeInsets.only(left: 0, bottom: 0),
                           alignment: Alignment.centerLeft
@@ -75,7 +75,7 @@ class _TransactionAddState extends State<TransactionAdd> {
                       Container(
                           child: Text(
                               "Bet",
-                              style: TextStyle(fontSize: 3.00.sp, color: Colors.white)
+                              style: TextStyle(fontSize: 3.00.sp, color: Colors.black87)
                           ),
                           margin: const EdgeInsets.only(left: 0, bottom: 0),
                           alignment: Alignment.centerLeft
