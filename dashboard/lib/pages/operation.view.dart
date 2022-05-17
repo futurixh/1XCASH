@@ -178,7 +178,7 @@ class _OperationViewState extends State<OperationView> {
                           _isActive = true;
                         });
                         try {
-                          await apiService.makeOperation(id, _amountController.text, _transactionType!).then(
+                          await apiService.makeOperation(id).then(
                                 (value) {
                               if (kDebugMode) {
                                 print(value!.toJson().toString(),);

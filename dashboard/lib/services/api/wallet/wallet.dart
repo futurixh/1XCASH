@@ -205,13 +205,12 @@ extension Wallets on ApiService {
     return null;
   }
 
-  Future<Wallet?> makeOperation(String id, String amount, String type) async {
+  Future<Transaction?> makeOperation(String id) async {
     String token = await getBearerToken();
 
     try {
       final response = await dio.post(
         Endpoints.makeOperation + id,
-        data: {"amount": amount, "type": type},
         options: Options(
           headers: {
             'Authorization': token,
@@ -220,9 +219,9 @@ extension Wallets on ApiService {
         ),
       );
 
-      final wallet = Wallet.fromJson(response.data["wallet"]);
+      final transaction = Transaction.fromJson(response.data["transaction"]);
       EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
-      return wallet;
+      return transaction;
     } on DioError catch (e) {
       if (e.response != null) {
         if (e.response!.data["message"] != null) {

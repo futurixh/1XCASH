@@ -1,8 +1,12 @@
+
 import 'package:flutter_web_seo/models/base.model.dart';
+import 'package:flutter_web_seo/models/user.model.dart';
 import 'package:flutter_web_seo/models/wallet.model.dart';
 
 class Transaction extends BaseModel {
   String? status;
+  bool? approval;
+  List<dynamic>? validations;
   String? sId;
   int? amount;
   String? type;
@@ -13,6 +17,8 @@ class Transaction extends BaseModel {
 
   Transaction({
     this.status,
+    this.approval,
+    this.validations,
     this.sId,
     this.amount,
     this.type,
@@ -24,6 +30,8 @@ class Transaction extends BaseModel {
 
   Transaction.fromJson(Map<String, dynamic> json) {
     status = json['status'];
+    approval = json['approval'];
+    validations = json['validations'];
     sId = json['_id'];
     amount = json['amount'];
     type = json['type'];
@@ -36,6 +44,8 @@ class Transaction extends BaseModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['status'] = status;
+    data['approval'] = approval;
+    data['validations'] = validations;
     data['_id'] = sId;
     data['amount'] = amount;
     data['type'] = type;
@@ -70,6 +80,27 @@ class Bet {
     data['id'] = id;
     data['type'] = type;
     data['client_telephone'] = clientTelephone;
+    return data;
+  }
+}
+
+class Validation {
+  String? id;
+  User? user;
+
+  Validation({this.id, this.user});
+
+  Validation.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    if (user != null) {
+      data['user'] = user!.toJson();
+    }
     return data;
   }
 }

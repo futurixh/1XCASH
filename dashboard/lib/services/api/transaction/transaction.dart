@@ -278,7 +278,12 @@ extension Transactions on ApiService {
       );
 
       final transaction = Transaction.fromJson(response.data["transaction"]);
-      EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
+      if (response.data["message"] != null) {
+        EasyLoading.showSuccess(response.data["message"], duration: const Duration(seconds: 3));
+      } else {
+        EasyLoading.showSuccess("Succès", duration: const Duration(seconds: 3));
+      }
+
       return transaction;
     } on DioError catch (e) {
       if (e.response != null) {

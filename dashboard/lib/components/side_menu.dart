@@ -116,13 +116,6 @@ class _SideMenuState extends State<SideMenu> {
             svgSrc: "assets/icons/money.svg",
             press: () => QR.toName(DemandView.routeName),
           ),
-          DrawerListTile(
-            visible: (currentUser?.role == "super-merchant" || currentUser?.role == "merchant") ? true : false,
-            active: QR.isCurrentName(OperationBetView.routeName)  ? true : false,
-            title: OperationBetView.routeName,
-            svgSrc: "assets/icons/chips-bet.svg",
-            press: () => QR.toName(OperationBetView.routeName),
-          ),
         ],
       ),
     );

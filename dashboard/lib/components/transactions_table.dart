@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_web_seo/components/loader_widget.dart';
 import 'package:flutter_web_seo/models/message.model.dart';
+import 'package:flutter_web_seo/services/api/wallet/wallet.dart';
 import 'package:flutter_web_seo/utils/constants.dart';
 import 'package:flutter_web_seo/utils/responsive.dart';
 import 'package:flutter_web_seo/services/api/transaction/transaction.dart';
@@ -34,6 +35,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
   bool _isActive = false;
   bool _isDelete = false;
   bool _isFinished = false;
+  bool _isOperation = false;
   List transactions = <Transaction>[];
 
   Widget toast(String message, Color color, Widget icon) {
@@ -87,6 +89,11 @@ class _TransactionsTableState extends State<TransactionsTable> {
   }
 
   DataRow transactionsDataRow(Transaction transaction) {
+
+    User? user1 = transaction.validations!.asMap().containsKey(0) ? Validation.fromJson(transaction.validations![0]).user : null;
+    User? user2 = transaction.validations!.asMap().containsKey(1) ? Validation.fromJson(transaction.validations![1]).user : null;
+    User? user3 = transaction.validations!.asMap().containsKey(2) ? Validation.fromJson(transaction.validations![2]).user : null;
+
     return DataRow(
       cells: [
         DataCell(Text(transaction.amount!.toString())),
@@ -97,10 +104,10 @@ class _TransactionsTableState extends State<TransactionsTable> {
               width: 5.00.wp,
               child: _isFinished ? const Loader() : ElevatedButton(
                 style: TextButton.styleFrom(
-                    backgroundColor: transaction.status! == "pending" ? Colors.orange : Colors.green
+                    backgroundColor: transaction.approval! == true ? Colors.green : Colors.red
                 ),
                 onPressed: () async {
-                  if (transaction.status! == "pending" && widget.currentUser?.role != "merchant") {
+                  if (transaction.approval! == false && widget.currentUser?.role != "merchant") {
                     setState(() {
                       _isFinished = true;
                     });
@@ -108,16 +115,16 @@ class _TransactionsTableState extends State<TransactionsTable> {
                       await apiService.validateTransaction(transaction.sId!).then(
                             (value) {
                           if (kDebugMode) {
-                            print(value!);
+                            print(value!.toJson().toString());
                           }
                           setState(() {
-                            transaction.status = "finished";
+                            transaction.validations = value!.validations;
+                            transaction.approval = value.approval;
                             _isFinished = false;
                           });
                         },
                       );
                     } catch (e) {
-                      EasyLoading.showError(e.toString(), duration: const Duration(seconds: 3));
                       setState(() {
                         _isFinished = false;
                       });
@@ -127,23 +134,73 @@ class _TransactionsTableState extends State<TransactionsTable> {
                     }
                   }
                 },
-                child: Text(transaction.status!),
+                child: Text(transaction.approval!.toString()),
               ),
             )
         ),
+        DataCell(
+          Container(
+            height: 3.00.hp,
+            width: 4.50.wp,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: transaction.status! == "finished" ? Colors.green : Colors.orange
+            ),
+            child: Center(child: Text(transaction.status!, style: TextStyle(fontSize: 2.50.sp, color: Colors.white),)),
+          ),
+        ),
+        DataCell(
+          Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: Colors.transparent
+            ),
+            child: Column(
+              children: [
+                user1 != null ? Text("${user1.firstname!} ${user1.lastname!}") : const Text("-"),
+                user2 != null ? Text("${user2.firstname!} ${user2.lastname!}") : const Text("-"),
+                user3 != null ? Text("${user3.firstname!} ${user3.lastname!}") : const Text("-"),
+
+              ],
+            )),
+          ),
         DataCell(
           Text("${transaction.wallet!.user!.firstname!} ${transaction.wallet!.user!.lastname!}"),
         ),
         DataCell(
           (transaction.bet != null && transaction.bet?.type != null)  ? Text(transaction.bet!.type!) : Text("No bet"),
         ),
+
         DataCell(Row(
           children: [
             IconButton(
-                onPressed: (transaction.status == "pending" && (widget.currentUser!.role == "admin" || (widget.currentUser!.role == "super-merchant" && transaction.wallet!.user!.role == "merchant"))) ? () {
-                  QR.to("/transaction/operation/${transaction.wallet!.sId!}/${transaction.amount}/${transaction.type}");
+                onPressed: ((transaction.approval == true && transaction.status == "pending") && (widget.currentUser!.role == "admin" || (widget.currentUser!.role == "super-merchant" && transaction.wallet!.user!.role == "merchant"))) ? () async {
+                  /*QR.to("/transaction/operation/${transaction.wallet!.sId!}/${transaction.amount}/${transaction.type}");*/
+                  setState(() {
+                    _isOperation = true;
+                  });
+                  try {
+                    await apiService.makeOperation(transaction.sId!).then(
+                          (value) {
+                            setState(() {
+                              transaction.status = value?.status;
+                              _isOperation = false;
+                            });
+                        if (kDebugMode) {
+                          print(value!.toJson().toString(),);
+                        }
+                      },
+                    );
+                  } catch (e) {
+                    setState(() {
+                      _isOperation = false;
+                    });
+                    if (kDebugMode) {
+                      print(e.toString());
+                    }
+                  }
                 } : null,
-                icon: const Icon(Icons.money),
+                icon: _isOperation ? const Loader() : const Icon(Icons.money),
                 iconSize: 2.00.hp),
             IconButton(
                 onPressed: (widget.currentUser!.role == "admin") ? () {
@@ -216,6 +273,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
               SizedBox(
                 width: double.infinity,
                 child: DataTable2(
+                  dataRowHeight: 6.50.hp,
                   empty: _isActive ? Loader() : Text("No Data"),
                   columnSpacing: 2.00.hp,
                   minWidth: 6.00.wp,
@@ -227,7 +285,13 @@ class _TransactionsTableState extends State<TransactionsTable> {
                       label: Text("Type"),
                     ),
                     DataColumn2(
+                      label: Text("Approval"),
+                    ),
+                    DataColumn2(
                       label: Text("Status"),
+                    ),
+                    DataColumn2(
+                      label: Text("Validations"),
                     ),
                     DataColumn2(label: Text("Wallet User")),
                     DataColumn2(label: Text("1xBet Type")),
