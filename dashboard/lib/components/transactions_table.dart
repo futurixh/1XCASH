@@ -96,8 +96,8 @@ class _TransactionsTableState extends State<TransactionsTable> {
 
     return DataRow(
       cells: [
-        DataCell(Text(transaction.amount!.toString())),
-        DataCell(Text(transaction.type!)),
+        DataCell(Text(transaction.amount!.toString(), style: TextStyle(fontSize: 2.50.sp),)),
+        DataCell(Text(transaction.type!, style: TextStyle(fontSize: 2.50.sp))),
         DataCell(
             SizedBox(
               height: 3.00.hp,
@@ -134,14 +134,14 @@ class _TransactionsTableState extends State<TransactionsTable> {
                     }
                   }
                 },
-                child: Text(transaction.approval!.toString()),
+                child: Text(transaction.approval!.toString(), style: TextStyle(fontSize: 2.50.sp)),
               ),
             )
         ),
         DataCell(
           Container(
             height: 3.00.hp,
-            width: 4.50.wp,
+            width: 5.00.wp,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
                 color: transaction.status! == "finished" ? Colors.green : Colors.orange
@@ -157,20 +157,16 @@ class _TransactionsTableState extends State<TransactionsTable> {
             ),
             child: Column(
               children: [
-                user1 != null ? Text("${user1.firstname!} ${user1.lastname!}") : const Text("-"),
-                user2 != null ? Text("${user2.firstname!} ${user2.lastname!}") : const Text("-"),
-                user3 != null ? Text("${user3.firstname!} ${user3.lastname!}") : const Text("-"),
+                user1 != null ? Text("${user1.firstname!} ${user1.lastname!}", style: TextStyle(fontSize: 2.20.sp, fontWeight: FontWeight.bold)) : Text("-", style: TextStyle(fontSize: 2.20.sp)),
+                user2 != null ? Text("${user2.firstname!} ${user2.lastname!}", style: TextStyle(fontSize: 2.20.sp, fontWeight: FontWeight.bold)) : Text("-", style: TextStyle(fontSize: 2.20.sp)),
+                user3 != null ? Text("${user3.firstname!} ${user3.lastname!}", style: TextStyle(fontSize: 2.20.sp, fontWeight: FontWeight.bold)) : Text("-", style: TextStyle(fontSize: 2.20.sp)),
 
               ],
             )),
           ),
         DataCell(
-          Text("${transaction.wallet!.user!.firstname!} ${transaction.wallet!.user!.lastname!}"),
+          Text("${transaction.wallet!.user!.firstname!} ${transaction.wallet!.user!.lastname!}" , style: TextStyle(fontSize: 2.50.sp)),
         ),
-        DataCell(
-          (transaction.bet != null && transaction.bet?.type != null)  ? Text(transaction.bet!.type!) : Text("No bet"),
-        ),
-
         DataCell(Row(
           children: [
             IconButton(
@@ -273,7 +269,7 @@ class _TransactionsTableState extends State<TransactionsTable> {
               SizedBox(
                 width: double.infinity,
                 child: DataTable2(
-                  dataRowHeight: 6.50.hp,
+                  dataRowHeight: 7.00.hp,
                   empty: _isActive ? Loader() : Text("No Data"),
                   columnSpacing: 2.00.hp,
                   minWidth: 6.00.wp,
@@ -294,7 +290,6 @@ class _TransactionsTableState extends State<TransactionsTable> {
                       label: Text("Validations"),
                     ),
                     DataColumn2(label: Text("Wallet User")),
-                    DataColumn2(label: Text("1xBet Type")),
                     DataColumn2(label: Text("Action")),
                   ],
                   rows: List.generate(

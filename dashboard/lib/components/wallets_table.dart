@@ -61,12 +61,12 @@ class _WalletsTableState extends State<WalletsTable> {
         ),
         DataCell(Row(
           children: [
-            IconButton(
+/*            IconButton(
                 onPressed: () {
                   QR.to("/wallet/edit/${wallet.sId!}");
                 },
                 icon: const Icon(Icons.edit),
-                iconSize: 2.00.hp),
+                iconSize: 2.00.hp),*/
             IconButton(
                 onPressed: () async {
                   try {

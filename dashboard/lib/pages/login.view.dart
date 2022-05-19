@@ -220,7 +220,7 @@ class _LoginViewState extends State<LoginView> {
                                           }
                                         },
                                   );
-                                  QR.to('/');
+                                  QR.navigator.replaceLast('/');
                                 } catch (e) {
                                   if (kDebugMode) {
                                     print(e.toString());

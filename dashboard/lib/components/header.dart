@@ -168,13 +168,12 @@ List<DropdownMenuItem<String>> typeItems = [
           const Text("Deconnexion"),
         ],
       ),
-      value: "debit",
       onTap: () async {
         try {
           await apiService.logout().then(
                 (value) => log(value!,),
           );
-          QR.to('/login');
+          QR.navigator.replaceAll('/login');
         } catch (e) {
           if (kDebugMode) {
             print(e.toString());
